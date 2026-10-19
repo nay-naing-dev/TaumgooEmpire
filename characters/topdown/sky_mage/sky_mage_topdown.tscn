@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="sky_mage_topdown.gd" id="1_s"]
+[ext_resource type="SpriteFrames" path="res://characters/sideview/sky_mage/sky_mage_frames.tres" id="2_f"]
+
+[sub_resource type="RectangleShape2D" id="Feet"]
+size = Vector2(14, 6)
+
+[sub_resource type="Gradient" id="GS"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="TS"]
+gradient = SubResource("GS")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="GL"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="TL"]
+gradient = SubResource("GL")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="SkyMageTopdown" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_s")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+scale = Vector2(0.4, 0.13)
+texture = SubResource("TS")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
+sprite_frames = ExtResource("2_f")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(0, -60)
+
+[node name="HandLight" type="PointLight2D" parent="."]
+position = Vector2(16, -44)
+color = Color(0.35, 1, 0.9, 1)
+energy = 0.0
+texture = SubResource("TL")
+texture_scale = 0.9
+height = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("Feet")

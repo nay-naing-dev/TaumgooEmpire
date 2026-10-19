@@ -1,0 +1,47 @@
+[gd_resource type="SpriteFrames" load_steps=22 format=3]
+
+[ext_resource type="Texture2D" path="frames/meditate.png" id="d0"]
+[ext_resource type="Texture2D" path="frames/meditate_n.png" id="n0"]
+[ext_resource type="Texture2D" path="frames/stand.png" id="d1"]
+[ext_resource type="Texture2D" path="frames/stand_n.png" id="n1"]
+[ext_resource type="Texture2D" path="frames/run_0.png" id="d2"]
+[ext_resource type="Texture2D" path="frames/run_0_n.png" id="n2"]
+[ext_resource type="Texture2D" path="frames/run_1.png" id="d3"]
+[ext_resource type="Texture2D" path="frames/run_1_n.png" id="n3"]
+[ext_resource type="Texture2D" path="frames/attack_0.png" id="d4"]
+[ext_resource type="Texture2D" path="frames/attack_0_n.png" id="n4"]
+[ext_resource type="Texture2D" path="frames/attack_1.png" id="d5"]
+[ext_resource type="Texture2D" path="frames/attack_1_n.png" id="n5"]
+[ext_resource type="Texture2D" path="frames/attack_2.png" id="d6"]
+[ext_resource type="Texture2D" path="frames/attack_2_n.png" id="n6"]
+
+[sub_resource type="CanvasTexture" id="C0"]
+diffuse_texture = ExtResource("d0")
+normal_texture = ExtResource("n0")
+
+[sub_resource type="CanvasTexture" id="C1"]
+diffuse_texture = ExtResource("d1")
+normal_texture = ExtResource("n1")
+
+[sub_resource type="CanvasTexture" id="C2"]
+diffuse_texture = ExtResource("d2")
+normal_texture = ExtResource("n2")
+
+[sub_resource type="CanvasTexture" id="C3"]
+diffuse_texture = ExtResource("d3")
+normal_texture = ExtResource("n3")
+
+[sub_resource type="CanvasTexture" id="C4"]
+diffuse_texture = ExtResource("d4")
+normal_texture = ExtResource("n4")
+
+[sub_resource type="CanvasTexture" id="C5"]
+diffuse_texture = ExtResource("d5")
+normal_texture = ExtResource("n5")
+
+[sub_resource type="CanvasTexture" id="C6"]
+diffuse_texture = ExtResource("d6")
+normal_texture = ExtResource("n6")
+
+[resource]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("C0")}], "loop": true, "name": &"meditate", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C1")}], "loop": true, "name": &"stand", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C2")}, {"duration": 1.0, "texture": SubResource("C3")}], "loop": true, "name": &"run", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C4")}], "loop": false, "name": &"attack_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C5")}], "loop": false, "name": &"attack_strike", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C6")}], "loop": false, "name": &"attack_recover", "speed": 1.0}]

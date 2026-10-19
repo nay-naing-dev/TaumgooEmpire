@@ -1,0 +1,171 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="tabinshwehti.gd" id="1_s"]
+[ext_resource type="SpriteFrames" path="tabinshwehti_frames.tres" id="2_f"]
+[ext_resource type="Texture2D" path="art/ritual_circle.png" id="3_c"]
+
+[sub_resource type="Gradient" id="G_dark"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="T_dark"]
+gradient = SubResource("G_dark")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="G_light"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="T_light"]
+gradient = SubResource("G_light")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CanvasItemMaterial" id="Add"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="G_ember"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(1, 0.55, 0.25, 1, 0.6, 0.05, 0.1, 0)
+
+[sub_resource type="Gradient" id="G_smoke"]
+offsets = PackedFloat32Array(0, 0.2, 1)
+colors = PackedColorArray(0.2, 0.05, 0.08, 0, 0.25, 0.05, 0.1, 0.7, 0.1, 0, 0.05, 0)
+
+[sub_resource type="CapsuleShape2D" id="Body"]
+radius = 10.0
+height = 22.0
+
+[sub_resource type="Gradient" id="G_spark"]
+colors = PackedColorArray(1, 1, 0.85, 1, 1, 0.5, 0.2, 0)
+
+[node name="Tabinshwehti" type="CharacterBody2D"]
+collision_layer = 1
+script = ExtResource("1_s")
+
+[node name="Aura" type="Node2D" parent="."]
+z_index = -1
+scale = Vector2(0.75, 0.75)
+
+[node name="Circle" type="Sprite2D" parent="Aura"]
+material = SubResource("Add")
+modulate = Color(1, 1, 1, 0.85)
+texture_filter = 1
+texture = ExtResource("3_c")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.95, 0.28)
+texture = SubResource("T_dark")
+
+[node name="DarkMist" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, -4)
+amount = 30
+lifetime = 2.2
+preprocess = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(30, 6)
+direction = Vector2(0, -1)
+spread = 25.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 4.0
+initial_velocity_max = 12.0
+scale_amount_min = 3.0
+scale_amount_max = 6.0
+color_ramp = SubResource("G_smoke")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.3, 1.3)
+sprite_frames = ExtResource("2_f")
+animation = &"meditate"
+offset = Vector2(0, -55)
+
+[node name="Embers" type="CPUParticles2D" parent="."]
+material = SubResource("Add")
+position = Vector2(0, -55)
+amount = 16
+lifetime = 1.6
+preprocess = 1.6
+emission_shape = 3
+emission_rect_extents = Vector2(22, 26)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -20)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("G_ember")
+
+[node name="AuraLight" type="PointLight2D" parent="."]
+position = Vector2(0, -30)
+color = Color(1, 0.35, 0.25, 1)
+energy = 0.7
+texture = SubResource("T_light")
+texture_scale = 2.0
+height = 30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+rotation = 1.5708
+shape = SubResource("Body")
+
+[node name="Roar" type="CPUParticles2D" parent="."]
+material = SubResource("Add")
+position = Vector2(0, -40)
+emitting = false
+amount = 50
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.9
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 60.0
+initial_velocity_max = 140.0
+scale_amount_min = 1.0
+scale_amount_max = 3.0
+color_ramp = SubResource("G_ember")
+
+[node name="HitSpark" type="CPUParticles2D" parent="."]
+material = SubResource("Add")
+position = Vector2(0, -45)
+emitting = false
+amount = 14
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 60.0
+initial_velocity_max = 130.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("G_spark")
+
+[node name="DeathBurst" type="CPUParticles2D" parent="."]
+material = SubResource("Add")
+position = Vector2(0, -45)
+emitting = false
+amount = 120
+lifetime = 1.6
+one_shot = true
+explosiveness = 0.8
+emission_shape = 3
+emission_rect_extents = Vector2(20, 40)
+direction = Vector2(0, -1)
+spread = 60.0
+gravity = Vector2(0, -30)
+initial_velocity_min = 20.0
+initial_velocity_max = 90.0
+scale_amount_min = 1.0
+scale_amount_max = 3.0
+color_ramp = SubResource("G_ember")

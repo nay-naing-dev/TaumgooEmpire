@@ -1,0 +1,323 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Texture2D" path="res://environment/backgrounds/sunset_hills/sky.png" id="t_sky"]
+[ext_resource type="Texture2D" path="res://environment/backgrounds/sunset_hills/hills_far.png" id="t_far"]
+[ext_resource type="Texture2D" path="res://environment/backgrounds/sunset_hills/hills_near.png" id="t_near"]
+[ext_resource type="Texture2D" path="res://environment/backgrounds/sunset_hills/tile_ground.png" id="t_top"]
+[ext_resource type="Texture2D" path="res://environment/backgrounds/sunset_hills/tile_fill.png" id="t_fill"]
+[ext_resource type="Texture2D" path="res://environment/backgrounds/sunset_hills/dummy.png" id="t_dummy"]
+[ext_resource type="Script" path="res://environment/props/dummy.gd" id="sc_dummy"]
+[ext_resource type="Script" path="res://scripts/sunset_stage.gd" id="p_hero"]
+
+[sub_resource type="RectangleShape2D" id="R0"]
+size = Vector2(1760, 92)
+
+[sub_resource type="RectangleShape2D" id="R1"]
+size = Vector2(128, 20)
+
+[sub_resource type="RectangleShape2D" id="R2"]
+size = Vector2(96, 20)
+
+[sub_resource type="RectangleShape2D" id="R3"]
+size = Vector2(160, 20)
+
+[sub_resource type="Gradient" id="GLt"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="TL"]
+gradient = SubResource("GLt")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="RectangleShape2D" id="RD"]
+size = Vector2(28, 86)
+
+[node name="SunsetStage" type="Node2D"]
+script = ExtResource("p_hero")
+
+[node name="Dusk" type="CanvasModulate" parent="."]
+color = Color(0.5, 0.48, 0.62, 1)
+
+[node name="Moon" type="DirectionalLight2D" parent="."]
+rotation = 0.6
+color = Color(0.75, 0.8, 1, 1)
+energy = 0.35
+height = 0.5
+
+[node name="Sky" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Gradient" type="TextureRect" parent="Sky"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("t_sky")
+expand_mode = 1
+texture_filter = 1
+
+[node name="HillsFar" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.15, 1)
+repeat_size = Vector2(480, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="HillsFar"]
+texture_filter = 1
+position = Vector2(-240, -128)
+texture = ExtResource("t_far")
+centered = false
+
+[node name="HillsNear" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.4, 1)
+repeat_size = Vector2(480, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="HillsNear"]
+texture_filter = 1
+position = Vector2(-240, -96)
+texture = ExtResource("t_near")
+centered = false
+
+[node name="Bedrock" type="Polygon2D" parent="."]
+color = Color(0.2, 0.16, 0.16, 1)
+polygon = PackedVector2Array(-2000, 90, 4000, 90, 4000, 2000, -2000, 2000)
+
+[node name="Platform0" type="StaticBody2D" parent="."]
+position = Vector2(-480, 0)
+
+[node name="Top" type="Sprite2D" parent="Platform0"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("t_top")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1760, 32)
+
+[node name="Fill" type="Sprite2D" parent="Platform0"]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, 32)
+texture = ExtResource("t_fill")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1760, 64)
+
+[node name="Shape" type="CollisionShape2D" parent="Platform0"]
+position = Vector2(880.0, 50.0)
+shape = SubResource("R0")
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(260, -64)
+
+[node name="Top" type="Sprite2D" parent="Platform1"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("t_top")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 32)
+
+[node name="Shape" type="CollisionShape2D" parent="Platform1"]
+position = Vector2(64.0, 14.0)
+shape = SubResource("R1")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(470, -124)
+
+[node name="Top" type="Sprite2D" parent="Platform2"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("t_top")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 32)
+
+[node name="Shape" type="CollisionShape2D" parent="Platform2"]
+position = Vector2(48.0, 14.0)
+shape = SubResource("R2")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(700, -76)
+
+[node name="Top" type="Sprite2D" parent="Platform3"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("t_top")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 160, 32)
+
+[node name="Shape" type="CollisionShape2D" parent="Platform3"]
+position = Vector2(80.0, 14.0)
+shape = SubResource("R3")
+
+[node name="Dummy0" type="StaticBody2D" parent="."]
+position = Vector2(170, 2)
+collision_layer = 2
+script = ExtResource("sc_dummy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dummy0"]
+texture_filter = 1
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("t_dummy")
+offset = Vector2(0, -26)
+
+[node name="Shape" type="CollisionShape2D" parent="Dummy0"]
+position = Vector2(0, -43)
+shape = SubResource("RD")
+
+[node name="Spark" type="CPUParticles2D" parent="Dummy0"]
+position = Vector2(0, -70)
+emitting = false
+amount = 14
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 60.0
+initial_velocity_max = 140.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color = Color(1, 0.95, 0.7, 1)
+
+[node name="Dummy1" type="StaticBody2D" parent="."]
+position = Vector2(960, 2)
+collision_layer = 2
+script = ExtResource("sc_dummy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dummy1"]
+texture_filter = 1
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("t_dummy")
+offset = Vector2(0, -26)
+
+[node name="Shape" type="CollisionShape2D" parent="Dummy1"]
+position = Vector2(0, -43)
+shape = SubResource("RD")
+
+[node name="Spark" type="CPUParticles2D" parent="Dummy1"]
+position = Vector2(0, -70)
+emitting = false
+amount = 14
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 60.0
+initial_velocity_max = 140.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color = Color(1, 0.95, 0.7, 1)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(20, 2)
+
+[node name="Torch0" type="PointLight2D" parent="."]
+position = Vector2(-120, -34)
+color = Color(1, 0.62, 0.3, 1)
+energy = 1.1
+texture = SubResource("TL")
+texture_scale = 2.4
+height = 40.0
+
+[node name="Flame" type="CPUParticles2D" parent="Torch0"]
+amount = 16
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -60)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color = Color(1, 0.7, 0.3, 1)
+
+[node name="Post" type="Polygon2D" parent="Torch0"]
+color = Color(0.25, 0.17, 0.12, 1)
+polygon = PackedVector2Array(-2, 2, 2, 2, 2, 28, -2, 28)
+
+[node name="Torch1" type="PointLight2D" parent="."]
+position = Vector2(330, -98)
+color = Color(1, 0.62, 0.3, 1)
+energy = 1.1
+texture = SubResource("TL")
+texture_scale = 2.4
+height = 40.0
+
+[node name="Flame" type="CPUParticles2D" parent="Torch1"]
+amount = 16
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -60)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color = Color(1, 0.7, 0.3, 1)
+
+[node name="Post" type="Polygon2D" parent="Torch1"]
+color = Color(0.25, 0.17, 0.12, 1)
+polygon = PackedVector2Array(-2, 2, 2, 2, 2, 28, -2, 28)
+
+[node name="Torch2" type="PointLight2D" parent="."]
+position = Vector2(640, -34)
+color = Color(1, 0.62, 0.3, 1)
+energy = 1.1
+texture = SubResource("TL")
+texture_scale = 2.4
+height = 40.0
+
+[node name="Flame" type="CPUParticles2D" parent="Torch2"]
+amount = 16
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -60)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color = Color(1, 0.7, 0.3, 1)
+
+[node name="Post" type="Polygon2D" parent="Torch2"]
+color = Color(0.25, 0.17, 0.12, 1)
+polygon = PackedVector2Array(-2, 2, 2, 2, 2, 28, -2, 28)
+
+[node name="Torch3" type="PointLight2D" parent="."]
+position = Vector2(900, -34)
+color = Color(1, 0.62, 0.3, 1)
+energy = 1.1
+texture = SubResource("TL")
+texture_scale = 2.4
+height = 40.0
+
+[node name="Flame" type="CPUParticles2D" parent="Torch3"]
+amount = 16
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -60)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+scale_amount_min = 1.5
+scale_amount_max = 3.0
+color = Color(1, 0.7, 0.3, 1)
+
+[node name="Post" type="Polygon2D" parent="Torch3"]
+color = Color(0.25, 0.17, 0.12, 1)
+polygon = PackedVector2Array(-2, 2, 2, 2, 2, 28, -2, 28)

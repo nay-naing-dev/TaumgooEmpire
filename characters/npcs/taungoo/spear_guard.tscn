@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="npc_idle.gd" id="1_s"]
+[ext_resource type="Texture2D" path="spear_guard.png" id="d"]
+[ext_resource type="Texture2D" path="spear_guard_n.png" id="nm"]
+
+[sub_resource type="CanvasTexture" id="CT"]
+diffuse_texture = ExtResource("d")
+normal_texture = ExtResource("nm")
+
+[sub_resource type="RectangleShape2D" id="Feet"]
+size = Vector2(10, 5)
+
+[sub_resource type="Gradient" id="GR"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="TR"]
+gradient = SubResource("GR")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="SpearGuard" type="StaticBody2D"]
+script = ExtResource("1_s")
+art_faces_left = false
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="."]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("d")
+centered = false
+offset = Vector2(-10, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CT")
+centered = false
+offset = Vector2(-10, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("Feet")

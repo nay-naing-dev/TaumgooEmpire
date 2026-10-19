@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://environment/taungoo/building.gd" id="1_s"]
+[ext_resource type="Texture2D" path="stilt_house_double.png" id="2_t"]
+[ext_resource type="Texture2D" path="stilt_house_double_n.png" id="3_n"]
+
+[sub_resource type="CanvasTexture" id="CT"]
+diffuse_texture = ExtResource("2_t")
+normal_texture = ExtResource("3_n")
+
+[sub_resource type="ConvexPolygonShape2D" id="Shape"]
+points = PackedVector2Array(-2, -115, 100, -34, -0, -11, -102, -92)
+
+[sub_resource type="Gradient" id="GR"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="TR"]
+gradient = SubResource("GR")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="StiltHouseDouble" type="StaticBody2D"]
+script = ExtResource("1_s")
+front_edge = PackedVector2Array(-124, -98, -118, -99, -116, -61, -108, -73, -87, -62, -81, -44, -79, -61, -71, -65, -62, -32, -55, -48, -2, -18, -1, 0, 4, -24, 23, -33, 29, -15, 31, -37, 45, -45, 53, -27, 55, -49, 70, -58, 79, -22, 110, -22, 122, -28)
+faded_alpha = 0.45
+
+[node name="CastShadow" type="Sprite2D" parent="."]
+modulate = Color(0.04, 0.03, 0.1, 0.36)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("2_t")
+centered = false
+offset = Vector2(-124, -204)
+
+[node name="ContactShadow" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0, 0, 0, 0.28)
+polygon = PackedVector2Array(-2, -115, 100, -34, -0, -11, -102, -92)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("CT")
+centered = false
+offset = Vector2(-124, -204)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape")

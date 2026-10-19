@@ -1,0 +1,328 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Texture2D" path="cave.png" id="1_image"]
+[ext_resource type="Texture2D" path="cave_fx_mask.png" id="2_mask"]
+[ext_resource type="Shader" path="cave_fx.gdshader" id="3_shader"]
+[ext_resource type="Script" path="cave_scene.gd" id="4_script"]
+
+[sub_resource type="ShaderMaterial" id="Mat_fx"]
+shader = ExtResource("3_shader")
+shader_parameter/fx_mask = ExtResource("2_mask")
+
+[sub_resource type="Gradient" id="Grad_glow"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_glow"]
+gradient = SubResource("Grad_glow")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CanvasItemMaterial" id="Mat_add"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Grad_smoke"]
+offsets = PackedFloat32Array(0, 0.15, 1)
+colors = PackedColorArray(0.85, 0.85, 0.85, 0, 0.8, 0.8, 0.82, 0.75, 0.6, 0.6, 0.65, 0)
+
+[sub_resource type="Curve" id="Curve_grow"]
+_data = [Vector2(0, 0.35), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Grad_ember"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(1, 0.85, 0.35, 1, 1, 0.35, 0.1, 0)
+
+[sub_resource type="Gradient" id="Grad_mist"]
+offsets = PackedFloat32Array(0, 0.3, 1)
+colors = PackedColorArray(0.8, 0.95, 1, 0, 0.8, 0.95, 1, 0.55, 0.8, 0.95, 1, 0)
+
+[sub_resource type="Gradient" id="Grad_fly"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(0.6, 1, 0.9, 0, 0.6, 1, 0.9, 1, 1, 0.9, 0.5, 1, 1, 0.9, 0.5, 0)
+
+[node name="CaveScene" type="Node2D"]
+script = ExtResource("4_script")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("Mat_fx")
+texture = ExtResource("1_image")
+centered = false
+
+[node name="Torches" type="Node2D" parent="."]
+
+[node name="Glow1" type="Sprite2D" parent="Torches" groups=["torch_glow"]]
+modulate = Color(1, 0.55, 0.2, 0.9)
+material = SubResource("Mat_add")
+position = Vector2(130, 752)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("Tex_glow")
+metadata/base_scale = 1.6
+
+[node name="Embers1" type="CPUParticles2D" parent="Torches"]
+position = Vector2(130, 748)
+amount = 5
+lifetime = 1.2
+preprocess = 1.2
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 6.0
+initial_velocity_max = 14.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_ember")
+
+[node name="Glow2" type="Sprite2D" parent="Torches" groups=["torch_glow"]]
+modulate = Color(1, 0.55, 0.2, 0.9)
+material = SubResource("Mat_add")
+position = Vector2(255, 733)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("Tex_glow")
+metadata/base_scale = 1.6
+
+[node name="Embers2" type="CPUParticles2D" parent="Torches"]
+position = Vector2(255, 729)
+amount = 5
+lifetime = 1.2
+preprocess = 1.2
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 6.0
+initial_velocity_max = 14.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_ember")
+
+[node name="Glow3" type="Sprite2D" parent="Torches" groups=["torch_glow"]]
+modulate = Color(1, 0.55, 0.2, 0.9)
+material = SubResource("Mat_add")
+position = Vector2(98, 806)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("Tex_glow")
+metadata/base_scale = 1.6
+
+[node name="Embers3" type="CPUParticles2D" parent="Torches"]
+position = Vector2(98, 802)
+amount = 5
+lifetime = 1.2
+preprocess = 1.2
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 6.0
+initial_velocity_max = 14.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_ember")
+
+[node name="Glow4" type="Sprite2D" parent="Torches" groups=["torch_glow"]]
+modulate = Color(1, 0.55, 0.2, 0.9)
+material = SubResource("Mat_add")
+position = Vector2(24, 878)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("Tex_glow")
+metadata/base_scale = 1.6
+
+[node name="Embers4" type="CPUParticles2D" parent="Torches"]
+position = Vector2(24, 874)
+amount = 5
+lifetime = 1.2
+preprocess = 1.2
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 6.0
+initial_velocity_max = 14.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_ember")
+
+[node name="Glow5" type="Sprite2D" parent="Torches" groups=["torch_glow"]]
+modulate = Color(1, 0.55, 0.2, 0.9)
+material = SubResource("Mat_add")
+position = Vector2(751, 877)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("Tex_glow")
+metadata/base_scale = 1.6
+
+[node name="Embers5" type="CPUParticles2D" parent="Torches"]
+position = Vector2(751, 873)
+amount = 5
+lifetime = 1.2
+preprocess = 1.2
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 6.0
+initial_velocity_max = 14.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_ember")
+
+[node name="Glow6" type="Sprite2D" parent="Torches" groups=["torch_glow"]]
+modulate = Color(1, 0.55, 0.2, 0.9)
+material = SubResource("Mat_add")
+position = Vector2(256, 1119)
+scale = Vector2(1.6, 1.6)
+texture = SubResource("Tex_glow")
+metadata/base_scale = 1.6
+
+[node name="Embers6" type="CPUParticles2D" parent="Torches"]
+position = Vector2(256, 1115)
+amount = 5
+lifetime = 1.2
+preprocess = 1.2
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 6.0
+initial_velocity_max = 14.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_ember")
+
+[node name="Crystals" type="Node2D" parent="."]
+
+[node name="Shine1" type="Sprite2D" parent="Crystals" groups=["crystal_glow"]]
+modulate = Color(0.45, 1, 0.95, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(273, 128)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("Tex_glow")
+
+[node name="Shine2" type="Sprite2D" parent="Crystals" groups=["crystal_glow"]]
+modulate = Color(0.45, 1, 0.95, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(672, 238)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("Tex_glow")
+
+[node name="Shine3" type="Sprite2D" parent="Crystals" groups=["crystal_glow"]]
+modulate = Color(0.45, 1, 0.95, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(638, 268)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("Tex_glow")
+
+[node name="Shine4" type="Sprite2D" parent="Crystals" groups=["crystal_glow"]]
+modulate = Color(0.45, 1, 0.95, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(58, 356)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("Tex_glow")
+
+[node name="Shine5" type="Sprite2D" parent="Crystals" groups=["crystal_glow"]]
+modulate = Color(0.45, 1, 0.95, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(116, 392)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("Tex_glow")
+
+[node name="Shine6" type="Sprite2D" parent="Crystals" groups=["crystal_glow"]]
+modulate = Color(0.45, 1, 0.95, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(298, 242)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("Tex_glow")
+
+[node name="ChimneySmoke" type="CPUParticles2D" parent="."]
+position = Vector2(305, 470)
+amount = 14
+lifetime = 5.0
+preprocess = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(2, 1)
+direction = Vector2(0.15, -1)
+spread = 8.0
+gravity = Vector2(4, -2)
+initial_velocity_min = 8.0
+initial_velocity_max = 12.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_grow")
+color_ramp = SubResource("Grad_smoke")
+
+[node name="Mist1" type="CPUParticles2D" parent="."]
+position = Vector2(198, 1010)
+amount = 40
+lifetime = 1.6
+preprocess = 1.6
+emission_shape = 3
+emission_rect_extents = Vector2(40, 4)
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 8.0
+initial_velocity_max = 22.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Grad_mist")
+
+[node name="Mist2" type="CPUParticles2D" parent="."]
+position = Vector2(347, 995)
+amount = 10
+lifetime = 1.6
+preprocess = 1.6
+emission_shape = 3
+emission_rect_extents = Vector2(8, 4)
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 8.0
+initial_velocity_max = 22.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Grad_mist")
+
+[node name="Mist3" type="CPUParticles2D" parent="."]
+position = Vector2(490, 1000)
+amount = 10
+lifetime = 1.6
+preprocess = 1.6
+emission_shape = 3
+emission_rect_extents = Vector2(8, 4)
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 8.0
+initial_velocity_max = 22.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Grad_mist")
+
+[node name="Fireflies" type="CPUParticles2D" parent="."]
+material = SubResource("Mat_add")
+position = Vector2(384, 820)
+amount = 26
+lifetime = 7.0
+preprocess = 7.0
+emission_shape = 3
+emission_rect_extents = Vector2(360, 380)
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, -1)
+initial_velocity_min = 2.0
+initial_velocity_max = 7.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_fly")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(384, 216)

@@ -1,0 +1,268 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Texture2D" path="yangon.png" id="1_image"]
+[ext_resource type="Texture2D" path="yangon_fx_mask.png" id="2_mask"]
+[ext_resource type="Shader" path="yangon_fx.gdshader" id="3_shader"]
+[ext_resource type="Script" path="yangon_scene.gd" id="4_script"]
+[ext_resource type="Texture2D" path="boat_rowing.png" id="5_row"]
+[ext_resource type="Texture2D" path="boat_ferry.png" id="6_ferry"]
+[ext_resource type="Script" path="boat.gd" id="7_boat"]
+
+[sub_resource type="ShaderMaterial" id="Mat_fx"]
+shader = ExtResource("3_shader")
+shader_parameter/fx_mask = ExtResource("2_mask")
+
+[sub_resource type="Gradient" id="Grad_glow"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_glow"]
+gradient = SubResource("Grad_glow")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CanvasItemMaterial" id="Mat_add"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Grad_wake"]
+offsets = PackedFloat32Array(0, 0.2, 1)
+colors = PackedColorArray(0.85, 0.95, 1, 0, 0.85, 0.95, 1, 0.8, 0.8, 0.9, 1, 0)
+
+[sub_resource type="Gradient" id="Grad_smoke"]
+offsets = PackedFloat32Array(0, 0.15, 1)
+colors = PackedColorArray(0.9, 0.88, 0.86, 0, 0.85, 0.83, 0.82, 0.8, 0.7, 0.66, 0.66, 0)
+
+[sub_resource type="Curve" id="Curve_grow"]
+_data = [Vector2(0, 0.35), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Grad_bird"]
+offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
+colors = PackedColorArray(0.15, 0.1, 0.15, 0, 0.15, 0.1, 0.15, 0.9, 0.15, 0.1, 0.15, 0.9, 0.15, 0.1, 0.15, 0)
+
+[node name="YangonHarbor" type="Node2D"]
+script = ExtResource("4_script")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("Mat_fx")
+texture = ExtResource("1_image")
+centered = false
+
+[node name="CityLamps" type="Node2D" parent="."]
+
+[node name="Lamp1" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(715, 265)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp2" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(766, 256)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp3" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(776, 264)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp4" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(821, 267)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp5" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(857, 277)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp6" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(889, 286)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp7" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(924, 305)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp8" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(979, 275)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp9" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(995, 292)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp10" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(1063, 298)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp11" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(1128, 305)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp12" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(1134, 255)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp13" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(1173, 282)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp14" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(1216, 250)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="Lamp15" type="Sprite2D" parent="CityLamps" groups=["city_lamp"]]
+modulate = Color(1, 0.8, 0.45, 0.8)
+material = SubResource("Mat_add")
+position = Vector2(1252, 287)
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_glow")
+
+[node name="SteamerSmoke" type="CPUParticles2D" parent="."]
+position = Vector2(231, 458)
+amount = 12
+lifetime = 4.5
+preprocess = 4.5
+emission_shape = 3
+emission_rect_extents = Vector2(2, 1)
+direction = Vector2(-0.3, -1)
+spread = 10.0
+gravity = Vector2(-4, -2)
+initial_velocity_min = 7.0
+initial_velocity_max = 11.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_grow")
+color_ramp = SubResource("Grad_smoke")
+
+[node name="Birds" type="CPUParticles2D" parent="."]
+position = Vector2(-20, 90)
+amount = 5
+lifetime = 60.0
+preprocess = 30.0
+emission_shape = 3
+emission_rect_extents = Vector2(4, 60)
+direction = Vector2(1, -0.05)
+spread = 4.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 18.0
+initial_velocity_max = 28.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_bird")
+
+[node name="Boats" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="RowingBoat" type="Sprite2D" parent="Boats"]
+texture_filter = 1
+position = Vector2(160, 630)
+texture = ExtResource("5_row")
+script = ExtResource("7_boat")
+point_a = Vector2(160, 630)
+point_b = Vector2(330, 602)
+speed = 9.0
+
+[node name="Wake" type="CPUParticles2D" parent="Boats/RowingBoat"]
+show_behind_parent = true
+position = Vector2(0, 16)
+amount = 18
+lifetime = 2.5
+local_coords = false
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_wake")
+
+[node name="Ferry" type="Sprite2D" parent="Boats"]
+texture_filter = 1
+position = Vector2(275, 690)
+texture = ExtResource("6_ferry")
+script = ExtResource("7_boat")
+point_a = Vector2(275, 690)
+point_b = Vector2(480, 728)
+speed = 11.0
+
+[node name="Wake" type="CPUParticles2D" parent="Boats/Ferry"]
+show_behind_parent = true
+position = Vector2(0, 44)
+amount = 18
+lifetime = 2.5
+local_coords = false
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("Grad_wake")
+
+[node name="FunnelSmoke" type="CPUParticles2D" parent="Boats/Ferry"]
+position = Vector2(-27, -42)
+metadata/base_x = -27.0
+amount = 10
+lifetime = 3.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(0, -1)
+spread = 12.0
+gravity = Vector2(-3, -2)
+initial_velocity_min = 6.0
+initial_velocity_max = 9.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_grow")
+color_ramp = SubResource("Grad_smoke")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(704, 384)

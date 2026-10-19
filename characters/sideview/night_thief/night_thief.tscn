@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="night_thief.gd" id="1_script"]
+[ext_resource type="SpriteFrames" path="night_thief_frames.tres" id="2_frames"]
+
+[sub_resource type="CapsuleShape2D" id="Body"]
+radius = 7.0
+height = 36.0
+
+[sub_resource type="RectangleShape2D" id="Hit"]
+size = Vector2(58, 50)
+
+[sub_resource type="Gradient" id="G"]
+colors = PackedColorArray(0, 0, 0, 0.5, 0, 0, 0, 0)
+
+[node name="NightThief" type="CharacterBody2D" groups=["player"]]
+collision_mask = 1
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_frames")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(0, -46)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("Body")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(36, -36)
+shape = SubResource("Hit")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+position = Vector2(0, -40)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0

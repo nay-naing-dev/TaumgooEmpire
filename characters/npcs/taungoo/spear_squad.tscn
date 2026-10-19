@@ -1,0 +1,322 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="marcher.gd" id="1_s"]
+[ext_resource type="Texture2D" path="soldier_a.png" id="soldier_a"]
+[ext_resource type="Texture2D" path="soldier_a_n.png" id="soldier_a_n"]
+[ext_resource type="Texture2D" path="soldier_b.png" id="soldier_b"]
+[ext_resource type="Texture2D" path="soldier_b_n.png" id="soldier_b_n"]
+
+[sub_resource type="CanvasTexture" id="CT_soldier_a"]
+diffuse_texture = ExtResource("soldier_a")
+normal_texture = ExtResource("soldier_a_n")
+
+[sub_resource type="CanvasTexture" id="CT_soldier_b"]
+diffuse_texture = ExtResource("soldier_b")
+normal_texture = ExtResource("soldier_b_n")
+
+[sub_resource type="Gradient" id="GR"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="TR"]
+gradient = SubResource("GR")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="SpearSquad" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_s")
+speed = 20.0
+step_rate = 2.0
+bob_pixels = 1.5
+art_faces_left = false
+
+[node name="Unit0" type="Node2D" parent="."]
+position = Vector2(-10, -12.0)
+
+[node name="Shadow" type="Sprite2D" parent="Unit0"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit0"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit0"]
+texture_filter = 1
+texture = SubResource("CT_soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Unit1" type="Node2D" parent="."]
+position = Vector2(5, -4.5)
+
+[node name="Shadow" type="Sprite2D" parent="Unit1"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit1"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit1"]
+texture_filter = 1
+texture = SubResource("CT_soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Unit2" type="Node2D" parent="."]
+position = Vector2(20, 3.0)
+
+[node name="Shadow" type="Sprite2D" parent="Unit2"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit2"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit2"]
+texture_filter = 1
+texture = SubResource("CT_soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Unit3" type="Node2D" parent="."]
+position = Vector2(35, 10.5)
+
+[node name="Shadow" type="Sprite2D" parent="Unit3"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit3"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit3"]
+texture_filter = 1
+texture = SubResource("CT_soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Unit4" type="Node2D" parent="."]
+position = Vector2(-23, -5.5)
+
+[node name="Shadow" type="Sprite2D" parent="Unit4"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit4"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit4"]
+texture_filter = 1
+texture = SubResource("CT_soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Unit5" type="Node2D" parent="."]
+position = Vector2(-8, 2.0)
+
+[node name="Shadow" type="Sprite2D" parent="Unit5"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit5"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit5"]
+texture_filter = 1
+texture = SubResource("CT_soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Unit6" type="Node2D" parent="."]
+position = Vector2(7, 9.5)
+
+[node name="Shadow" type="Sprite2D" parent="Unit6"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit6"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit6"]
+texture_filter = 1
+texture = SubResource("CT_soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Unit7" type="Node2D" parent="."]
+position = Vector2(22, 17.0)
+
+[node name="Shadow" type="Sprite2D" parent="Unit7"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit7"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit7"]
+texture_filter = 1
+texture = SubResource("CT_soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Unit8" type="Node2D" parent="."]
+position = Vector2(-36, 1.0)
+
+[node name="Shadow" type="Sprite2D" parent="Unit8"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit8"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit8"]
+texture_filter = 1
+texture = SubResource("CT_soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Unit9" type="Node2D" parent="."]
+position = Vector2(-21, 8.5)
+
+[node name="Shadow" type="Sprite2D" parent="Unit9"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit9"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit9"]
+texture_filter = 1
+texture = SubResource("CT_soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Unit10" type="Node2D" parent="."]
+position = Vector2(-6, 16.0)
+
+[node name="Shadow" type="Sprite2D" parent="Unit10"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit10"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit10"]
+texture_filter = 1
+texture = SubResource("CT_soldier_a")
+centered = false
+offset = Vector2(-12, -47)
+
+[node name="Unit11" type="Node2D" parent="."]
+position = Vector2(9, 23.5)
+
+[node name="Shadow" type="Sprite2D" parent="Unit11"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.32, 0.1)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit11"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("soldier_b")
+centered = false
+offset = Vector2(-7, -42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit11"]
+texture_filter = 1
+texture = SubResource("CT_soldier_b")
+centered = false
+offset = Vector2(-7, -42)

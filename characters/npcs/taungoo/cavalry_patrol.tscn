@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="marcher.gd" id="1_s"]
+[ext_resource type="Texture2D" path="cavalry_1.png" id="cavalry_1"]
+[ext_resource type="Texture2D" path="cavalry_1_n.png" id="cavalry_1_n"]
+[ext_resource type="Texture2D" path="cavalry_2.png" id="cavalry_2"]
+[ext_resource type="Texture2D" path="cavalry_2_n.png" id="cavalry_2_n"]
+
+[sub_resource type="CanvasTexture" id="CT_cavalry_1"]
+diffuse_texture = ExtResource("cavalry_1")
+normal_texture = ExtResource("cavalry_1_n")
+
+[sub_resource type="CanvasTexture" id="CT_cavalry_2"]
+diffuse_texture = ExtResource("cavalry_2")
+normal_texture = ExtResource("cavalry_2_n")
+
+[sub_resource type="Gradient" id="GR"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="TR"]
+gradient = SubResource("GR")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="CavalryPatrol" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_s")
+speed = 34.0
+step_rate = 3.2
+bob_pixels = 2.5
+art_faces_left = true
+
+[node name="Unit0" type="Node2D" parent="."]
+position = Vector2(0, 0)
+
+[node name="Shadow" type="Sprite2D" parent="Unit0"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.75, 0.16)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit0"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("cavalry_1")
+centered = false
+offset = Vector2(-23, -62)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit0"]
+texture_filter = 1
+texture = SubResource("CT_cavalry_1")
+centered = false
+offset = Vector2(-23, -62)
+
+[node name="Unit1" type="Node2D" parent="."]
+position = Vector2(-30, -14)
+
+[node name="Shadow" type="Sprite2D" parent="Unit1"]
+modulate = Color(1, 1, 1, 0.55)
+z_index = -1
+scale = Vector2(0.75, 0.16)
+texture = SubResource("TR")
+
+[node name="CastShadow" type="Sprite2D" parent="Unit1"]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+skew = -0.95
+scale = Vector2(1, 0.45)
+texture = ExtResource("cavalry_2")
+centered = false
+offset = Vector2(-22, -67)
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit1"]
+texture_filter = 1
+texture = SubResource("CT_cavalry_2")
+centered = false
+offset = Vector2(-22, -67)

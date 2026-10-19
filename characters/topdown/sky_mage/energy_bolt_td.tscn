@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="energy_bolt_td.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://characters/sideview/sky_mage/art/bolt.png" id="2_t"]
+
+[sub_resource type="CircleShape2D" id="Sh"]
+radius = 13.0
+
+[sub_resource type="Gradient" id="GL"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="TL"]
+gradient = SubResource("GL")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="GT"]
+colors = PackedColorArray(0.7, 1, 0.95, 1, 0.1, 0.7, 0.75, 0)
+
+[sub_resource type="CanvasItemMaterial" id="Add"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="GS"]
+colors = PackedColorArray(0.2, 1, 0.9, 0.35, 0.2, 1, 0.9, 0)
+
+[sub_resource type="GradientTexture2D" id="TS"]
+gradient = SubResource("GS")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="EnergyBoltTD" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_s")
+
+[node name="GroundGlow" type="Sprite2D" parent="."]
+material = SubResource("Add")
+scale = Vector2(0.5, 0.18)
+texture = SubResource("TS")
+
+[node name="Visual" type="Node2D" parent="."]
+position = Vector2(0, -30)
+
+[node name="Trail" type="CPUParticles2D" parent="Visual"]
+material = SubResource("Add")
+amount = 40
+lifetime = 0.45
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 16.0
+scale_amount_min = 1.0
+scale_amount_max = 2.5
+color_ramp = SubResource("GT")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual"]
+material = SubResource("Add")
+texture_filter = 1
+texture = ExtResource("2_t")
+offset = Vector2(-4, 0)
+
+[node name="Light" type="PointLight2D" parent="Visual"]
+color = Color(0.35, 1, 0.9, 1)
+energy = 1.3
+texture = SubResource("TL")
+texture_scale = 1.4
+height = 24.0
+
+[node name="Burst" type="CPUParticles2D" parent="Visual"]
+material = SubResource("Add")
+emitting = false
+amount = 30
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 110.0
+scale_amount_min = 1.0
+scale_amount_max = 3.0
+color_ramp = SubResource("GT")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Sh")

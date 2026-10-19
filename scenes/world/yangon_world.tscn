@@ -1,0 +1,567 @@
+[gd_scene load_steps=36 format=3]
+
+[ext_resource type="Texture2D" path="art/world_ground.png" id="t_ground"]
+[ext_resource type="Texture2D" path="art/world_ground_n.png" id="t_ground_n"]
+[ext_resource type="Shader" path="res://environment/riverside/water.gdshader" id="s_water"]
+[ext_resource type="Shader" path="res://environment/riverside/reflection.gdshader" id="s_refl"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="sc_world"]
+[ext_resource type="Script" path="res://environment/riverside/flicker.gd" id="sc_flicker"]
+[ext_resource type="PackedScene" path="res://environment/buildings/colonial_office.tscn" id="p_office"]
+[ext_resource type="PackedScene" path="res://environment/buildings/street_lamp.tscn" id="p_lamp"]
+[ext_resource type="PackedScene" path="res://environment/trees/red_tree/red_tree.tscn" id="p_tree"]
+[ext_resource type="PackedScene" path="res://characters/topdown/burmese_man/burmese_man_npc.tscn" id="p_npc"]
+[ext_resource type="Texture2D" path="res://environment/buildings/colonial_office.png" id="t_office"]
+[ext_resource type="Texture2D" path="res://environment/buildings/street_lamp.png" id="t_lamp"]
+[ext_resource type="Texture2D" path="res://environment/props/boat_rowing.png" id="t_row"]
+[ext_resource type="Texture2D" path="res://environment/props/boat_ferry.png" id="t_ferry"]
+[ext_resource type="Script" path="res://environment/props/boat.gd" id="sc_boat"]
+[ext_resource type="PackedScene" path="res://characters/enemies/tabinshwehti/tabinshwehti.tscn" id="p_boss"]
+[ext_resource type="PackedScene" path="res://environment/buildings/shophouse_1.tscn" id="p_h1"]
+[ext_resource type="PackedScene" path="res://environment/buildings/shophouse_2.tscn" id="p_h2"]
+[ext_resource type="PackedScene" path="res://environment/buildings/shophouse_3.tscn" id="p_h3"]
+[ext_resource type="PackedScene" path="res://environment/buildings/shophouse_4.tscn" id="p_h4"]
+
+[sub_resource type="CanvasTexture" id="CT_ground"]
+diffuse_texture = ExtResource("t_ground")
+normal_texture = ExtResource("t_ground_n")
+
+[sub_resource type="ShaderMaterial" id="M_water"]
+shader = ExtResource("s_water")
+shader_parameter/edge_c = 638.0
+
+[sub_resource type="ShaderMaterial" id="M_refl"]
+shader = ExtResource("s_refl")
+
+[sub_resource type="Gradient" id="G_radial"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="T_radial"]
+gradient = SubResource("G_radial")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="G_beam"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="T_beam"]
+gradient = SubResource("G_beam")
+width = 16
+height = 64
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CanvasItemMaterial" id="M_add"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="G_dust"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 0.85, 0.6, 0, 1, 0.85, 0.6, 0.8, 1, 0.85, 0.6, 0.8, 1, 0.85, 0.6, 0)
+
+[sub_resource type="Gradient" id="G_wake"]
+offsets = PackedFloat32Array(0, 0.2, 1)
+colors = PackedColorArray(0.85, 0.95, 1, 0, 0.85, 0.95, 1, 0.8, 0.8, 0.9, 1, 0)
+
+[sub_resource type="Gradient" id="G_smoke"]
+offsets = PackedFloat32Array(0, 0.15, 1)
+colors = PackedColorArray(0.9, 0.88, 0.86, 0, 0.85, 0.83, 0.82, 0.8, 0.7, 0.66, 0.66, 0)
+
+[sub_resource type="Curve" id="C_grow"]
+_data = [Vector2(0, 0.35), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="YangonWorld" type="Node2D"]
+script = ExtResource("sc_world")
+
+[node name="Dusk" type="CanvasModulate" parent="."]
+color = Color(0.68, 0.63, 0.74, 1)
+
+[node name="Ground" type="Sprite2D" parent="."]
+z_index = -10
+texture_filter = 1
+texture = SubResource("CT_ground")
+centered = false
+
+[node name="Water" type="Polygon2D" parent="."]
+z_index = -9
+clip_children = 2
+material = SubResource("M_water")
+polygon = PackedVector2Array(-80, 597, 2200, 1737, 2200, 1500, -80, 1500)
+
+[node name="OfficeReflection" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(1150, 1227)
+scale = Vector2(1.5, -1.5)
+texture = ExtResource("t_office")
+centered = false
+offset = Vector2(-173, -237)
+
+[node name="LampReflection0" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(140, 723)
+scale = Vector2(1.0, -1.0)
+texture = ExtResource("t_lamp")
+centered = false
+offset = Vector2(-63, -122)
+
+[node name="LightStreak0" type="Sprite2D" parent="Water"]
+modulate = Color(1, 0.75, 0.4, 0.5)
+material = SubResource("M_add")
+position = Vector2(139, 738)
+scale = Vector2(0.12, 0.5)
+texture = SubResource("T_radial")
+script = ExtResource("sc_flicker")
+amount = 0.15
+
+[node name="LampReflection1" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(310, 808)
+scale = Vector2(1.0, -1.0)
+texture = ExtResource("t_lamp")
+centered = false
+offset = Vector2(-63, -122)
+
+[node name="LightStreak1" type="Sprite2D" parent="Water"]
+modulate = Color(1, 0.75, 0.4, 0.5)
+material = SubResource("M_add")
+position = Vector2(309, 823)
+scale = Vector2(0.12, 0.5)
+texture = SubResource("T_radial")
+script = ExtResource("sc_flicker")
+amount = 0.15
+
+[node name="LampReflection2" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(650, 978)
+scale = Vector2(1.0, -1.0)
+texture = ExtResource("t_lamp")
+centered = false
+offset = Vector2(-63, -122)
+
+[node name="LightStreak2" type="Sprite2D" parent="Water"]
+modulate = Color(1, 0.75, 0.4, 0.5)
+material = SubResource("M_add")
+position = Vector2(649, 993)
+scale = Vector2(0.12, 0.5)
+texture = SubResource("T_radial")
+script = ExtResource("sc_flicker")
+amount = 0.15
+
+[node name="LampReflection3" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(820, 1063)
+scale = Vector2(1.0, -1.0)
+texture = ExtResource("t_lamp")
+centered = false
+offset = Vector2(-63, -122)
+
+[node name="LightStreak3" type="Sprite2D" parent="Water"]
+modulate = Color(1, 0.75, 0.4, 0.5)
+material = SubResource("M_add")
+position = Vector2(819, 1078)
+scale = Vector2(0.12, 0.5)
+texture = SubResource("T_radial")
+script = ExtResource("sc_flicker")
+amount = 0.15
+
+[node name="LampReflection4" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(1330, 1318)
+scale = Vector2(1.0, -1.0)
+texture = ExtResource("t_lamp")
+centered = false
+offset = Vector2(-63, -122)
+
+[node name="LightStreak4" type="Sprite2D" parent="Water"]
+modulate = Color(1, 0.75, 0.4, 0.5)
+material = SubResource("M_add")
+position = Vector2(1329, 1333)
+scale = Vector2(0.12, 0.5)
+texture = SubResource("T_radial")
+script = ExtResource("sc_flicker")
+amount = 0.15
+
+[node name="LampReflection5" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(1500, 1403)
+scale = Vector2(1.0, -1.0)
+texture = ExtResource("t_lamp")
+centered = false
+offset = Vector2(-63, -122)
+
+[node name="LightStreak5" type="Sprite2D" parent="Water"]
+modulate = Color(1, 0.75, 0.4, 0.5)
+material = SubResource("M_add")
+position = Vector2(1499, 1418)
+scale = Vector2(0.12, 0.5)
+texture = SubResource("T_radial")
+script = ExtResource("sc_flicker")
+amount = 0.15
+
+[node name="LampReflection6" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(1670, 1488)
+scale = Vector2(1.0, -1.0)
+texture = ExtResource("t_lamp")
+centered = false
+offset = Vector2(-63, -122)
+
+[node name="LightStreak6" type="Sprite2D" parent="Water"]
+modulate = Color(1, 0.75, 0.4, 0.5)
+material = SubResource("M_add")
+position = Vector2(1669, 1503)
+scale = Vector2(0.12, 0.5)
+texture = SubResource("T_radial")
+script = ExtResource("sc_flicker")
+amount = 0.15
+
+[node name="LampReflection7" type="Sprite2D" parent="Water"]
+material = SubResource("M_refl")
+texture_filter = 1
+position = Vector2(1840, 1573)
+scale = Vector2(1.0, -1.0)
+texture = ExtResource("t_lamp")
+centered = false
+offset = Vector2(-63, -122)
+
+[node name="LightStreak7" type="Sprite2D" parent="Water"]
+modulate = Color(1, 0.75, 0.4, 0.5)
+material = SubResource("M_add")
+position = Vector2(1839, 1588)
+scale = Vector2(0.12, 0.5)
+texture = SubResource("T_radial")
+script = ExtResource("sc_flicker")
+amount = 0.15
+
+[node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="ColonialOffice" parent="Objects" instance=ExtResource("p_office")]
+position = Vector2(1150, 1185)
+scale = Vector2(1.5, 1.5)
+
+[node name="Shophouse0" parent="Objects" instance=ExtResource("p_h1")]
+position = Vector2(150, 421)
+scale = Vector2(2.0, 2.0)
+
+[node name="Shophouse1" parent="Objects" instance=ExtResource("p_h2")]
+position = Vector2(410, 551)
+scale = Vector2(2.0, 2.0)
+
+[node name="Shophouse2" parent="Objects" instance=ExtResource("p_h3")]
+position = Vector2(670, 681)
+scale = Vector2(2.0, 2.0)
+
+[node name="Shophouse3" parent="Objects" instance=ExtResource("p_h4")]
+position = Vector2(1010, 851)
+scale = Vector2(2.0, 2.0)
+
+[node name="Shophouse4" parent="Objects" instance=ExtResource("p_h1")]
+position = Vector2(1270, 981)
+scale = Vector2(2.0, 2.0)
+
+[node name="Shophouse5" parent="Objects" instance=ExtResource("p_h2")]
+position = Vector2(1530, 1111)
+scale = Vector2(2.0, 2.0)
+
+[node name="Shophouse6" parent="Objects" instance=ExtResource("p_h3")]
+position = Vector2(1790, 1241)
+scale = Vector2(2.0, 2.0)
+
+[node name="Lamp0" parent="Objects" instance=ExtResource("p_lamp")]
+position = Vector2(140, 678)
+
+[node name="Lamp1" parent="Objects" instance=ExtResource("p_lamp")]
+position = Vector2(310, 763)
+
+[node name="Lamp2" parent="Objects" instance=ExtResource("p_lamp")]
+position = Vector2(650, 933)
+
+[node name="Lamp3" parent="Objects" instance=ExtResource("p_lamp")]
+position = Vector2(820, 1018)
+
+[node name="Lamp4" parent="Objects" instance=ExtResource("p_lamp")]
+position = Vector2(1330, 1273)
+
+[node name="Lamp5" parent="Objects" instance=ExtResource("p_lamp")]
+position = Vector2(1500, 1358)
+
+[node name="Lamp6" parent="Objects" instance=ExtResource("p_lamp")]
+position = Vector2(1670, 1443)
+
+[node name="Lamp7" parent="Objects" instance=ExtResource("p_lamp")]
+position = Vector2(1840, 1528)
+
+[node name="Tree0" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1953, 821)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree1" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(790, 142)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree2" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1750, 436)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree3" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(985, 172)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree4" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1590, 294)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree5" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1969, 693)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree6" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1889, 159)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree7" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1351, 302)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree8" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1072, 339)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree9" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(983, 520)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree10" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(480, 158)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree11" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1555, 638)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree12" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(761, 337)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree13" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1927, 355)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree14" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1775, 628)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree15" parent="Objects" instance=ExtResource("p_tree")]
+position = Vector2(1651, 714)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tabinshwehti" parent="Objects" instance=ExtResource("p_boss")]
+position = Vector2(1420, 470)
+
+[node name="Townsperson0" parent="Objects" instance=ExtResource("p_npc")]
+position = Vector2(600, 860)
+
+[node name="Townsperson1" parent="Objects" instance=ExtResource("p_npc")]
+position = Vector2(880, 980)
+
+[node name="Townsperson2" parent="Objects" instance=ExtResource("p_npc")]
+position = Vector2(1380, 1120)
+
+[node name="Townsperson3" parent="Objects" instance=ExtResource("p_npc")]
+position = Vector2(1520, 1190)
+
+[node name="Townsperson4" parent="Objects" instance=ExtResource("p_npc")]
+position = Vector2(300, 760)
+
+[node name="Townsperson5" parent="Objects" instance=ExtResource("p_npc")]
+position = Vector2(1250, 880)
+
+[node name="RowingBoat" type="Sprite2D" parent="Objects"]
+texture_filter = 1
+position = Vector2(120, 790)
+texture = ExtResource("t_row")
+script = ExtResource("sc_boat")
+point_a = Vector2(120, 790)
+point_b = Vector2(600, 1030)
+speed = 9.0
+
+[node name="Wake" type="CPUParticles2D" parent="Objects/RowingBoat"]
+show_behind_parent = true
+position = Vector2(0, 16)
+amount = 18
+lifetime = 2.5
+local_coords = false
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("G_wake")
+
+[node name="Ferry" type="Sprite2D" parent="Objects"]
+texture_filter = 1
+position = Vector2(380, 1060)
+texture = ExtResource("t_ferry")
+script = ExtResource("sc_boat")
+point_a = Vector2(380, 1060)
+point_b = Vector2(900, 1260)
+speed = 11.0
+
+[node name="Wake" type="CPUParticles2D" parent="Objects/Ferry"]
+show_behind_parent = true
+position = Vector2(0, 44)
+amount = 18
+lifetime = 2.5
+local_coords = false
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("G_wake")
+
+[node name="RowingBoat2" type="Sprite2D" parent="Objects"]
+texture_filter = 1
+position = Vector2(1000, 1250)
+texture = ExtResource("t_row")
+script = ExtResource("sc_boat")
+point_a = Vector2(1000, 1250)
+point_b = Vector2(560, 1040)
+speed = 8.0
+
+[node name="Wake" type="CPUParticles2D" parent="Objects/RowingBoat2"]
+show_behind_parent = true
+position = Vector2(0, 16)
+amount = 18
+lifetime = 2.5
+local_coords = false
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color_ramp = SubResource("G_wake")
+
+[node name="FunnelSmoke" type="CPUParticles2D" parent="Objects/Ferry"]
+position = Vector2(-27, -42)
+metadata/base_x = -27.0
+amount = 10
+lifetime = 3.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(0, -1)
+spread = 12.0
+gravity = Vector2(-3, -2)
+initial_velocity_min = 6.0
+initial_velocity_max = 9.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("C_grow")
+color_ramp = SubResource("G_smoke")
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(720, 880)
+
+[node name="Sun" type="DirectionalLight2D" parent="."]
+rotation = 2.356
+color = Color(1, 0.66, 0.4, 1)
+energy = 0.55
+height = 0.45
+
+[node name="GodRays" type="Node2D" parent="."]
+
+[node name="Ray0" type="Sprite2D" parent="GodRays"]
+modulate = Color(1, 0.78, 0.5, 0.06)
+material = SubResource("M_add")
+position = Vector2(1500, 300)
+rotation = 0.95
+scale = Vector2(2.0, 14.0)
+texture = SubResource("T_beam")
+script = ExtResource("sc_flicker")
+amount = 0.35
+speed = 0.12
+
+[node name="Ray1" type="Sprite2D" parent="GodRays"]
+modulate = Color(1, 0.78, 0.5, 0.045)
+material = SubResource("M_add")
+position = Vector2(1100, 150)
+rotation = 0.95
+scale = Vector2(1.2, 14.0)
+texture = SubResource("T_beam")
+script = ExtResource("sc_flicker")
+amount = 0.35
+speed = 0.12
+
+[node name="Ray2" type="Sprite2D" parent="GodRays"]
+modulate = Color(1, 0.78, 0.5, 0.05)
+material = SubResource("M_add")
+position = Vector2(1800, 600)
+rotation = 0.95
+scale = Vector2(2.6, 14.0)
+texture = SubResource("T_beam")
+script = ExtResource("sc_flicker")
+amount = 0.35
+speed = 0.12
+
+[node name="Ray3" type="Sprite2D" parent="GodRays"]
+modulate = Color(1, 0.78, 0.5, 0.035)
+material = SubResource("M_add")
+position = Vector2(700, 100)
+rotation = 0.95
+scale = Vector2(1.0, 14.0)
+texture = SubResource("T_beam")
+script = ExtResource("sc_flicker")
+amount = 0.35
+speed = 0.12
+
+[node name="Ray4" type="Sprite2D" parent="GodRays"]
+modulate = Color(1, 0.78, 0.5, 0.04)
+material = SubResource("M_add")
+position = Vector2(900, 600)
+rotation = 0.95
+scale = Vector2(1.6, 14.0)
+texture = SubResource("T_beam")
+script = ExtResource("sc_flicker")
+amount = 0.35
+speed = 0.12
+
+[node name="Dust" type="CPUParticles2D" parent="."]
+material = SubResource("M_add")
+position = Vector2(1024, 640)
+amount = 120
+lifetime = 10.0
+preprocess = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(1024, 640)
+direction = Vector2(-1, -0.3)
+spread = 40.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 6.0
+color_ramp = SubResource("G_dust")

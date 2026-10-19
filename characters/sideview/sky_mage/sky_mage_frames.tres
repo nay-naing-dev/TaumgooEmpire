@@ -1,0 +1,113 @@
+[gd_resource type="SpriteFrames" load_steps=55 format=3]
+
+[ext_resource type="Texture2D" path="frames/idle_0.png" id="d0"]
+[ext_resource type="Texture2D" path="frames/idle_0_n.png" id="n0"]
+[ext_resource type="Texture2D" path="frames/idle_1.png" id="d1"]
+[ext_resource type="Texture2D" path="frames/idle_1_n.png" id="n1"]
+[ext_resource type="Texture2D" path="frames/idle_2.png" id="d2"]
+[ext_resource type="Texture2D" path="frames/idle_2_n.png" id="n2"]
+[ext_resource type="Texture2D" path="frames/idle_3.png" id="d3"]
+[ext_resource type="Texture2D" path="frames/idle_3_n.png" id="n3"]
+[ext_resource type="Texture2D" path="frames/idle_4.png" id="d4"]
+[ext_resource type="Texture2D" path="frames/idle_4_n.png" id="n4"]
+[ext_resource type="Texture2D" path="frames/idle_5.png" id="d5"]
+[ext_resource type="Texture2D" path="frames/idle_5_n.png" id="n5"]
+[ext_resource type="Texture2D" path="frames/idle_6.png" id="d6"]
+[ext_resource type="Texture2D" path="frames/idle_6_n.png" id="n6"]
+[ext_resource type="Texture2D" path="frames/walk_0.png" id="d7"]
+[ext_resource type="Texture2D" path="frames/walk_0_n.png" id="n7"]
+[ext_resource type="Texture2D" path="frames/walk_1.png" id="d8"]
+[ext_resource type="Texture2D" path="frames/walk_1_n.png" id="n8"]
+[ext_resource type="Texture2D" path="frames/walk_2.png" id="d9"]
+[ext_resource type="Texture2D" path="frames/walk_2_n.png" id="n9"]
+[ext_resource type="Texture2D" path="frames/walk_3.png" id="d10"]
+[ext_resource type="Texture2D" path="frames/walk_3_n.png" id="n10"]
+[ext_resource type="Texture2D" path="frames/cast_0.png" id="d11"]
+[ext_resource type="Texture2D" path="frames/cast_0_n.png" id="n11"]
+[ext_resource type="Texture2D" path="frames/cast_1.png" id="d12"]
+[ext_resource type="Texture2D" path="frames/cast_1_n.png" id="n12"]
+[ext_resource type="Texture2D" path="frames/cast_2.png" id="d13"]
+[ext_resource type="Texture2D" path="frames/cast_2_n.png" id="n13"]
+[ext_resource type="Texture2D" path="frames/cast_3.png" id="d14"]
+[ext_resource type="Texture2D" path="frames/cast_3_n.png" id="n14"]
+[ext_resource type="Texture2D" path="frames/cast_4.png" id="d15"]
+[ext_resource type="Texture2D" path="frames/cast_4_n.png" id="n15"]
+[ext_resource type="Texture2D" path="frames/jump_0.png" id="d16"]
+[ext_resource type="Texture2D" path="frames/jump_0_n.png" id="n16"]
+[ext_resource type="Texture2D" path="frames/fall_0.png" id="d17"]
+[ext_resource type="Texture2D" path="frames/fall_0_n.png" id="n17"]
+
+[sub_resource type="CanvasTexture" id="C0"]
+diffuse_texture = ExtResource("d0")
+normal_texture = ExtResource("n0")
+
+[sub_resource type="CanvasTexture" id="C1"]
+diffuse_texture = ExtResource("d1")
+normal_texture = ExtResource("n1")
+
+[sub_resource type="CanvasTexture" id="C2"]
+diffuse_texture = ExtResource("d2")
+normal_texture = ExtResource("n2")
+
+[sub_resource type="CanvasTexture" id="C3"]
+diffuse_texture = ExtResource("d3")
+normal_texture = ExtResource("n3")
+
+[sub_resource type="CanvasTexture" id="C4"]
+diffuse_texture = ExtResource("d4")
+normal_texture = ExtResource("n4")
+
+[sub_resource type="CanvasTexture" id="C5"]
+diffuse_texture = ExtResource("d5")
+normal_texture = ExtResource("n5")
+
+[sub_resource type="CanvasTexture" id="C6"]
+diffuse_texture = ExtResource("d6")
+normal_texture = ExtResource("n6")
+
+[sub_resource type="CanvasTexture" id="C7"]
+diffuse_texture = ExtResource("d7")
+normal_texture = ExtResource("n7")
+
+[sub_resource type="CanvasTexture" id="C8"]
+diffuse_texture = ExtResource("d8")
+normal_texture = ExtResource("n8")
+
+[sub_resource type="CanvasTexture" id="C9"]
+diffuse_texture = ExtResource("d9")
+normal_texture = ExtResource("n9")
+
+[sub_resource type="CanvasTexture" id="C10"]
+diffuse_texture = ExtResource("d10")
+normal_texture = ExtResource("n10")
+
+[sub_resource type="CanvasTexture" id="C11"]
+diffuse_texture = ExtResource("d11")
+normal_texture = ExtResource("n11")
+
+[sub_resource type="CanvasTexture" id="C12"]
+diffuse_texture = ExtResource("d12")
+normal_texture = ExtResource("n12")
+
+[sub_resource type="CanvasTexture" id="C13"]
+diffuse_texture = ExtResource("d13")
+normal_texture = ExtResource("n13")
+
+[sub_resource type="CanvasTexture" id="C14"]
+diffuse_texture = ExtResource("d14")
+normal_texture = ExtResource("n14")
+
+[sub_resource type="CanvasTexture" id="C15"]
+diffuse_texture = ExtResource("d15")
+normal_texture = ExtResource("n15")
+
+[sub_resource type="CanvasTexture" id="C16"]
+diffuse_texture = ExtResource("d16")
+normal_texture = ExtResource("n16")
+
+[sub_resource type="CanvasTexture" id="C17"]
+diffuse_texture = ExtResource("d17")
+normal_texture = ExtResource("n17")
+
+[resource]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("C0")}, {"duration": 1.0, "texture": SubResource("C1")}, {"duration": 1.0, "texture": SubResource("C2")}, {"duration": 1.0, "texture": SubResource("C3")}, {"duration": 1.0, "texture": SubResource("C4")}, {"duration": 1.0, "texture": SubResource("C5")}, {"duration": 1.0, "texture": SubResource("C6")}], "loop": true, "name": &"idle", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C7")}, {"duration": 1.0, "texture": SubResource("C8")}, {"duration": 1.0, "texture": SubResource("C9")}, {"duration": 1.0, "texture": SubResource("C10")}], "loop": true, "name": &"walk", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C11")}, {"duration": 1.0, "texture": SubResource("C12")}, {"duration": 1.0, "texture": SubResource("C13")}, {"duration": 1.0, "texture": SubResource("C14")}, {"duration": 3.0, "texture": SubResource("C15")}], "loop": false, "name": &"cast", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C16")}], "loop": true, "name": &"jump", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C17")}], "loop": true, "name": &"fall", "speed": 1.0}]
