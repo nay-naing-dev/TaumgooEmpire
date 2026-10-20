@@ -122,7 +122,7 @@ func _state_run(delta: float) -> void:
 		return
 
 	var iso_direction := to_isometric(input_vector)
-	velocity = velocity.move_toward(iso_direction * move_speed, acceleration * delta)
+	velocity = velocity.move_toward(iso_direction * move_speed * (0.65 if Game.is_water(global_position) else 1.0), acceleration * delta)  # slower when wading
 	_update_facing(iso_direction)
 
 

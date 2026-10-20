@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	elif input != Vector2.ZERO:
 		var dir := Vector2(input.x, input.y * iso_vertical_ratio)
-		velocity = velocity.move_toward(dir * move_speed, acceleration * delta)
+		velocity = velocity.move_toward(dir * move_speed * (0.65 if Game.is_water(global_position) else 1.0), acceleration * delta)  # slower when wading
 		aim = dir.normalized()
 		if absf(input.x) > 0.1:
 			sprite.flip_h = input.x < 0.0

@@ -157,13 +157,13 @@ centered = false
 [node name="WaterEdges" type="StaticBody2D" parent="."]
 
 [node name="Shore0" type="CollisionPolygon2D" parent="WaterEdges"]
-polygon = PackedVector2Array(2047, 860, 2011, 878, 1931, 901, 1864, 942, 1817, 987, 1780, 1003, 1729, 1012, 1669, 1038, 1622, 1082, 1596, 1099, 1507, 1121, 1470, 1134, 1408, 1184, 1394, 1189, 1362, 1214, 1332, 1230, 1321, 1241, 1303, 1247, 1284, 1264, 1261, 1268, 1213, 1262, 1180, 1279, 2047, 1279)
+polygon = PackedVector2Array(2047, 893, 1999, 912, 1946, 925, 1882, 964, 1835, 1009, 1789, 1030, 1735, 1040, 1707, 1055, 1684, 1062, 1640, 1104, 1605, 1126, 1482, 1160, 1426, 1206, 1408, 1214, 1336, 1265, 1321, 1270, 1315, 1279, 2047, 1279)
 
 [node name="Shore1" type="CollisionPolygon2D" parent="WaterEdges"]
-polygon = PackedVector2Array(1446, 258, 1450, 272, 1478, 288, 1514, 280, 1462, 250, 1454, 250)
+polygon = PackedVector2Array(1446, 258, 1450, 272, 1478, 288, 1510, 281, 1509, 276, 1462, 250, 1454, 250)
 
 [node name="Shore2" type="CollisionPolygon2D" parent="WaterEdges"]
-polygon = PackedVector2Array(2045, 217, 1927, 276, 1926, 279, 1934, 285, 1932, 303, 1779, 382, 1637, 311, 1625, 315, 1605, 309, 1580, 317, 1556, 305, 1523, 313, 1563, 336, 1561, 344, 1578, 355, 1576, 373, 1766, 470, 1772, 470, 2044, 332)
+polygon = PackedVector2Array(2045, 219, 1929, 275, 1934, 285, 1932, 303, 1779, 382, 1638, 312, 1625, 315, 1605, 309, 1580, 317, 1556, 305, 1528, 312, 1528, 316, 1563, 336, 1562, 345, 1578, 355, 1579, 375, 1766, 470, 1772, 470, 2044, 332)
 
 [node name="MapEdges" type="StaticBody2D" parent="."]
 
@@ -1329,6 +1329,12 @@ initial_velocity_max = 4.0
 scale_amount_min = 1.0
 scale_amount_max = 2.0
 color_ramp = SubResource("G_wake")
+
+[node name="Moon" type="DirectionalLight2D" parent="."]
+rotation = -2.3
+color = Color(0.6, 0.72, 1, 1)
+energy = 0.0
+height = 0.6
 
 [node name="SunShafts" type="Node2D" parent="."]
 

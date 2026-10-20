@@ -1,27 +1,35 @@
-[gd_resource type="SpriteFrames" load_steps=22 format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://b4ryqg74dmgtq"]
 
-[ext_resource type="Texture2D" path="frames/meditate.png" id="d0"]
-[ext_resource type="Texture2D" path="frames/meditate_n.png" id="n0"]
-[ext_resource type="Texture2D" path="frames/stand.png" id="d1"]
-[ext_resource type="Texture2D" path="frames/stand_n.png" id="n1"]
-[ext_resource type="Texture2D" path="frames/run_0.png" id="d2"]
-[ext_resource type="Texture2D" path="frames/run_0_n.png" id="n2"]
-[ext_resource type="Texture2D" path="frames/run_1.png" id="d3"]
-[ext_resource type="Texture2D" path="frames/run_1_n.png" id="n3"]
-[ext_resource type="Texture2D" path="frames/attack_0.png" id="d4"]
-[ext_resource type="Texture2D" path="frames/attack_0_n.png" id="n4"]
-[ext_resource type="Texture2D" path="frames/attack_1.png" id="d5"]
-[ext_resource type="Texture2D" path="frames/attack_1_n.png" id="n5"]
-[ext_resource type="Texture2D" path="frames/attack_2.png" id="d6"]
-[ext_resource type="Texture2D" path="frames/attack_2_n.png" id="n6"]
+[ext_resource type="Texture2D" uid="uid://bwcxjuvforalu" path="res://characters/enemies/tabinshwehti/frames/meditate.png" id="d0"]
+[ext_resource type="Texture2D" uid="uid://cgs5fuopej4ku" path="res://characters/enemies/tabinshwehti/frames/stand.png" id="d1"]
+[ext_resource type="Texture2D" uid="uid://basqq3f6hgohn" path="res://characters/enemies/tabinshwehti/frames/run_0.png" id="d2"]
+[ext_resource type="Texture2D" uid="uid://b8qlho0mprus0" path="res://characters/enemies/tabinshwehti/frames/run_1.png" id="d3"]
+[ext_resource type="Texture2D" uid="uid://vhxi8x4igr3y" path="res://characters/enemies/tabinshwehti/frames/attack_0.png" id="d4"]
+[ext_resource type="Texture2D" uid="uid://byml24t18xpq3" path="res://characters/enemies/tabinshwehti/frames/attack_1.png" id="d5"]
+[ext_resource type="Texture2D" uid="uid://cc7acso8wps3l" path="res://characters/enemies/tabinshwehti/frames/attack_2.png" id="d6"]
+[ext_resource type="Texture2D" uid="uid://bmfs10e25mhc8" path="res://characters/enemies/tabinshwehti/frames/meditate_n.png" id="n0"]
+[ext_resource type="Texture2D" uid="uid://ddduxhjlemymj" path="res://characters/enemies/tabinshwehti/frames/stand_n.png" id="n1"]
+[ext_resource type="Texture2D" uid="uid://b6aagbu7af8d0" path="res://characters/enemies/tabinshwehti/frames/run_0_n.png" id="n2"]
+[ext_resource type="Texture2D" uid="uid://dfg0ihsybh5yy" path="res://characters/enemies/tabinshwehti/frames/run_1_n.png" id="n3"]
+[ext_resource type="Texture2D" uid="uid://dl0a4dads3xif" path="res://characters/enemies/tabinshwehti/frames/attack_0_n.png" id="n4"]
+[ext_resource type="Texture2D" uid="uid://b708t5gdx11y4" path="res://characters/enemies/tabinshwehti/frames/attack_1_n.png" id="n5"]
+[ext_resource type="Texture2D" uid="uid://b1b5mppm83c51" path="res://characters/enemies/tabinshwehti/frames/attack_2_n.png" id="n6"]
+
+[sub_resource type="CanvasTexture" id="C6"]
+diffuse_texture = ExtResource("d6")
+normal_texture = ExtResource("n6")
+
+[sub_resource type="CanvasTexture" id="C5"]
+diffuse_texture = ExtResource("d5")
+normal_texture = ExtResource("n5")
+
+[sub_resource type="CanvasTexture" id="C4"]
+diffuse_texture = ExtResource("d4")
+normal_texture = ExtResource("n4")
 
 [sub_resource type="CanvasTexture" id="C0"]
 diffuse_texture = ExtResource("d0")
 normal_texture = ExtResource("n0")
-
-[sub_resource type="CanvasTexture" id="C1"]
-diffuse_texture = ExtResource("d1")
-normal_texture = ExtResource("n1")
 
 [sub_resource type="CanvasTexture" id="C2"]
 diffuse_texture = ExtResource("d2")
@@ -31,17 +39,60 @@ normal_texture = ExtResource("n2")
 diffuse_texture = ExtResource("d3")
 normal_texture = ExtResource("n3")
 
-[sub_resource type="CanvasTexture" id="C4"]
-diffuse_texture = ExtResource("d4")
-normal_texture = ExtResource("n4")
-
-[sub_resource type="CanvasTexture" id="C5"]
-diffuse_texture = ExtResource("d5")
-normal_texture = ExtResource("n5")
-
-[sub_resource type="CanvasTexture" id="C6"]
-diffuse_texture = ExtResource("d6")
-normal_texture = ExtResource("n6")
+[sub_resource type="CanvasTexture" id="C1"]
+diffuse_texture = ExtResource("d1")
+normal_texture = ExtResource("n1")
 
 [resource]
-animations = [{"frames": [{"duration": 1.0, "texture": SubResource("C0")}], "loop": true, "name": &"meditate", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C1")}], "loop": true, "name": &"stand", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C2")}, {"duration": 1.0, "texture": SubResource("C3")}], "loop": true, "name": &"run", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C4")}], "loop": false, "name": &"attack_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C5")}], "loop": false, "name": &"attack_strike", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("C6")}], "loop": false, "name": &"attack_recover", "speed": 1.0}]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("C6")
+}],
+"loop": 0,
+"name": &"attack_recover",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("C5")
+}],
+"loop": 0,
+"name": &"attack_strike",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("C4")
+}],
+"loop": 0,
+"name": &"attack_windup",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("C0")
+}],
+"loop": 1,
+"name": &"meditate",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("C2")
+}, {
+"duration": 1.0,
+"texture": SubResource("C3")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("C1")
+}],
+"loop": 1,
+"name": &"stand",
+"speed": 1.0
+}]

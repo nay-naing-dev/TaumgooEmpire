@@ -83,3 +83,49 @@ selecting `Objects/Tabinshwehti` (Max Health, Damage, Speed, Aggro Radius).
   dappled shadows and go see-through when you walk behind them.
 - Colour grade: `Grade/Screen` in the world. Tune Bloom, Warmth, Vignette in its
   material, or hide it on slow PCs (it costs some performance).
+
+## ASCII mode and night (F2 / F3)
+
+| Key | What it does |
+|---|---|
+| **F2** | ASCII graphics on/off: the whole world is redrawn as coloured text characters (`/ \ | - ; r ? T @ ...`) |
+| **F3** | Day / night (moonlight, no sun shafts, more fireflies). Fades over 1.5 s |
+
+Both work anywhere, also on the title screen. ASCII + night gives the dark terminal look.
+
+- Your character and the boss stay as normal sprites on top, so you can always see them.
+  To turn them into text too, set `ascii_keep_characters_clear = false` in `scripts/game.gd`.
+- Start the game in ASCII or night mode: set `ascii_mode = true` / `night_mode = true` at the top of `scripts/game.gd`.
+- Tune the look in `environment/fx/ascii/ascii.gdshader`:
+  - `cell` — character size in pixels (bigger = chunkier letters, `vec2(8, 13)` default)
+  - `edge_threshold` — lower = more `/ \ | -` outline strokes
+  - `contrast` — higher = darker, emptier background
+  - `vivid` / `saturation` — how colourful the letters are
+  - `brightness`, `background`, `glow`
+- Letters come from `environment/fx/ascii/glyphs.png` (16 dark→bright letters + 4 line strokes, 12×20 each).
+
+## Living light, reflections, wading
+
+**Light on the body.** Every character (you, the NPCs and the boss) has a rounded normal
+map for every animation frame (`*_n.png` next to each picture or sheet). As you run,
+attack or turn, light and shade roll over arms, legs, clothes and face. Walk past a
+torch and watch the lit side follow it. Walk through the forest and the leaf and
+building shadows slide over your body.
+- Shader: `environment/fx/lit_character.gdshader`. Material settings: `shade_strength`
+  (how dark the tree shadows on you are), `rim_strength` (bright edge on the lit side),
+  `contrast` (how strong the light/dark split is).
+- It is added automatically to any sprite in a scene saved under `res://characters/`,
+  as long as there is a normal map. For your own character:
+  `python3 normals.py my_sheet.png` makes `my_sheet_n.png` (script in `tools/normals.py`).
+- Turn it off: `living_light = false` in `scripts/game.gd`.
+
+**Water reflections.** Characters, boats and riverside palms get an upside-down,
+rippling reflection, shown only on water. Turn off with `water_reflections = false`
+in `scripts/game.gd`. Tune `strength`, `tint`, `fade_px` and `wobble` in
+`environment/fx/water_reflection.gdshader`.
+
+**Wading and ripples.** You can walk about 30 px into the river shallows (slower,
+feet under the water line). Rings spread out around you while you wade (faster while
+moving), around the boats, and now and then from fish. Settings: the **Ripples** node
+script `scripts/ripples.gd` (ring_color, max_radius, life, fish_rings).
+In ASCII mode (F2) the rings turn into `( ) / \` text rings.
