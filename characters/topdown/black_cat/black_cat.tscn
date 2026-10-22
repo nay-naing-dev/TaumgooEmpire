@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cifw3if1imdnf"]
+
+[ext_resource type="Script" uid="uid://c4f4afx5mwkau" path="res://characters/topdown/black_cat/black_cat.gd" id="1_s"]
+[ext_resource type="SpriteFrames" uid="uid://cmn8uvfo0dx4t" path="res://characters/topdown/black_cat/black_cat_frames.tres" id="2_f"]
+[ext_resource type="SpriteFrames" path="res://characters/topdown/black_cat/black_cat_eyes.tres" id="3_e"]
+
+[sub_resource type="Gradient" id="GS"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="TS"]
+gradient = SubResource("GS")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CanvasItemMaterial" id="Glow"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="RectangleShape2D" id="Feet"]
+size = Vector2(16, 6)
+
+[node name="BlackCat" type="CharacterBody2D" unique_id=1250212622 groups=["player"]]
+script = ExtResource("1_s")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1639980325]
+modulate = Color(1, 1, 1, 0.5)
+scale = Vector2(0.5, 0.12)
+texture = SubResource("TS")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1552617173]
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
+sprite_frames = ExtResource("2_f")
+animation = &"idle_e"
+autoplay = "idle_e"
+offset = Vector2(0, -26)
+
+[node name="Eyes" type="AnimatedSprite2D" parent="." unique_id=42311076]
+texture_filter = 1
+material = SubResource("Glow")
+scale = Vector2(0.6, 0.6)
+sprite_frames = ExtResource("3_e")
+animation = &"idle_e"
+offset = Vector2(0, -26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1072919696]
+position = Vector2(0, -2)
+shape = SubResource("Feet")

@@ -1,51 +1,40 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene format=3 uid="uid://omqy2synfwr1"]
 
-[ext_resource type="Script" path="res://environment/taungoo/building.gd" id="1_s"]
-[ext_resource type="Texture2D" path="palace.png" id="2_t"]
-[ext_resource type="Texture2D" path="palace_n.png" id="3_n"]
+[ext_resource type="Script" uid="uid://mb5vdsj1o3yk" path="res://environment/taungoo/building.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://cjj28fklkyh4c" path="res://environment/taungoo/buildings/palace.png" id="2_t"]
+[ext_resource type="Texture2D" uid="uid://p8vyc4lsmri1" path="res://environment/taungoo/buildings/palace_n.png" id="3_n"]
 
 [sub_resource type="CanvasTexture" id="CT"]
 diffuse_texture = ExtResource("2_t")
 normal_texture = ExtResource("3_n")
 
 [sub_resource type="ConvexPolygonShape2D" id="Shape"]
-points = PackedVector2Array(35, -268, 232, -187, 3, -27, -194, -108)
+points = PackedVector2Array(55, -308, 296, -189, -41, 4, -289, -94)
 
-[sub_resource type="Gradient" id="GR"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="TR"]
-gradient = SubResource("GR")
-width = 128
-height = 128
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-
-[node name="Palace" type="StaticBody2D"]
+[node name="Palace" type="StaticBody2D" unique_id=1334471534]
 script = ExtResource("1_s")
 front_edge = PackedVector2Array(-241, -99, -211, -49, -154, -30, -69, -31, 2, 0, 98, -79, 119, -50, 167, -54, 171, -99, 254, -146, 279, -196)
-faded_alpha = 0.45
 
-[node name="CastShadow" type="Sprite2D" parent="."]
+[node name="CastShadow" type="Sprite2D" parent="." unique_id=1610208009]
 modulate = Color(0.04, 0.03, 0.1, 0.36)
 z_index = -1
-skew = -0.95
 scale = Vector2(1, 0.45)
+skew = -0.95
 texture = ExtResource("2_t")
 centered = false
 offset = Vector2(-241, -437)
 
-[node name="ContactShadow" type="Polygon2D" parent="."]
+[node name="ContactShadow" type="Polygon2D" parent="." unique_id=738954121]
 z_index = -1
 color = Color(0, 0, 0, 0.28)
 polygon = PackedVector2Array(35, -268, 232, -187, 3, -27, -194, -108)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1557492201]
 texture_filter = 1
 texture = SubResource("CT")
 centered = false
 offset = Vector2(-241, -437)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=688996913]
+position = Vector2(16, -8)
 shape = SubResource("Shape")

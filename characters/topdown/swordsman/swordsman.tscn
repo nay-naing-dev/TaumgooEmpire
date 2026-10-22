@@ -1,38 +1,36 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://c6bcy4q3olnim"]
 
-[ext_resource type="Script" path="res://scripts/player_topdown.gd" id="1_player"]
-[ext_resource type="SpriteFrames" path="swordsman_frames.tres" id="2_frames"]
-
-[sub_resource type="RectangleShape2D" id="Rect_feet"]
-size = Vector2(14, 6)
+[ext_resource type="Script" uid="uid://cr3tdud1fnbvf" path="res://scripts/player_topdown.gd" id="1_player"]
+[ext_resource type="SpriteFrames" uid="uid://dailmmdvrruh3" path="res://characters/topdown/swordsman/swordsman_frames.tres" id="2_frames"]
 
 [sub_resource type="Gradient" id="G"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="T"]
 gradient = SubResource("G")
-width = 64
-height = 64
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
-[node name="Swordsman" type="CharacterBody2D" groups=["player"]]
+[sub_resource type="RectangleShape2D" id="Rect_feet"]
+size = Vector2(14, 6)
+
+[node name="Swordsman" type="CharacterBody2D" unique_id=32661105 groups=["player"]]
 script = ExtResource("1_player")
 move_speed = 75.0
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1686907008]
 modulate = Color(1, 1, 1, 0.5)
 scale = Vector2(0.4, 0.13)
 texture = SubResource("T")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2045648650]
 texture_filter = 1
-scale = Vector2(0.55, 0.55)
+scale = Vector2(0.35, 0.35)
 sprite_frames = ExtResource("2_frames")
 animation = &"idle_s"
 autoplay = "idle_s"
 offset = Vector2(0, -66)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1913866155]
 shape = SubResource("Rect_feet")

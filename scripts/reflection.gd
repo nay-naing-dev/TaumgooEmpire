@@ -5,6 +5,8 @@ extends Sprite2D
 var src: Node2D
 ## Water line in the source sprite's local pixels (0 = its origin, i.e. the feet).
 var mirror_y := 0.0
+## How far below the sprite to look for water before showing the reflection.
+var check_reach := 70.0
 var _check := 0.0
 
 
@@ -26,7 +28,7 @@ func _process(delta: float) -> void:
 	if _check <= 0.0:
 		_check = 0.25
 		visible = src.is_visible_in_tree() and Game.water_near(
-				src.global_position + Vector2(0, mirror_y * src.global_scale.y), 70.0)
+				src.global_position + Vector2(0, mirror_y * src.global_scale.y), check_reach)
 	if not visible:
 		return
 	if src is AnimatedSprite2D:

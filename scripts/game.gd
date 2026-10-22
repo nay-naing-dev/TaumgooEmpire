@@ -7,6 +7,8 @@ const TOPDOWN := {
 	"gunslinger": "res://characters/topdown/gunslinger/gunslinger.tscn",
 	"burmese_man": "res://characters/topdown/burmese_man/burmese_man.tscn",
 	"sky_mage": "res://characters/topdown/sky_mage/sky_mage_topdown.tscn",
+	"black_cat": "res://characters/topdown/black_cat/black_cat.tscn",
+	"hero": "res://characters/topdown/hero/hero.tscn",
 }
 const SIDEVIEW := {
 	"sky_mage": "res://characters/sideview/sky_mage/sky_mage.tscn",
@@ -17,7 +19,7 @@ const TITLE := "res://scenes/title/title_screen.tscn"
 const WORLD := "res://scenes/world/taungoo_world.tscn"
 const STAGE := "res://scenes/stages/sunset_stage.tscn"
 
-var topdown_character := "swordsman"
+var topdown_character := "hero"
 ## F2 toggles ASCII-art graphics, F3 toggles day / night.
 var ascii_mode := false
 var night_mode := false

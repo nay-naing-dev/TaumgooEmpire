@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b052583kgpkww"]
+
+[ext_resource type="Script" uid="uid://mb5vdsj1o3yk" path="res://environment/taungoo/building.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://dg2ouvpoe5s3l" path="res://environment/taungoo/village/pagoda_gold.png" id="2_t"]
+[ext_resource type="Texture2D" uid="uid://bsci4jcxy132u" path="res://environment/taungoo/village/pagoda_gold_n.png" id="3_n"]
+
+[sub_resource type="CanvasTexture" id="CT"]
+diffuse_texture = ExtResource("2_t")
+normal_texture = ExtResource("3_n")
+
+[sub_resource type="ConvexPolygonShape2D" id="Shape"]
+points = PackedVector2Array(-44, -22, 0, 0, 43, -22, -2, -44)
+
+[node name="GoldPagoda" type="StaticBody2D" unique_id=749360923]
+script = ExtResource("1_s")
+front_edge = PackedVector2Array(-44, -22, 0, 0, 43, -22)
+
+[node name="CastShadow" type="Sprite2D" parent="." unique_id=727084109]
+modulate = Color(0.04, 0.03, 0.1, 0.3)
+z_index = -1
+scale = Vector2(1, 0.45)
+skew = -0.95
+texture = ExtResource("2_t")
+centered = false
+offset = Vector2(-81, -147)
+
+[node name="ContactShadow" type="Polygon2D" parent="." unique_id=1132268904]
+z_index = -1
+color = Color(0, 0, 0, 0.25)
+polygon = PackedVector2Array(-44, -22, 0, 0, 43, -22, -2, -44)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=971534618]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = SubResource("CT")
+centered = false
+offset = Vector2(-81, -147)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=17611075]
+shape = SubResource("Shape")

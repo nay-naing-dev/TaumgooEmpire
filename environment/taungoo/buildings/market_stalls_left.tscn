@@ -1,51 +1,40 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene format=3 uid="uid://dtv2ef2wwdd53"]
 
-[ext_resource type="Script" path="res://environment/taungoo/building.gd" id="1_s"]
-[ext_resource type="Texture2D" path="market_stalls_left.png" id="2_t"]
-[ext_resource type="Texture2D" path="market_stalls_left_n.png" id="3_n"]
+[ext_resource type="Script" uid="uid://mb5vdsj1o3yk" path="res://environment/taungoo/building.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://70asel64c1h2" path="res://environment/taungoo/buildings/market_stalls_left.png" id="2_t"]
+[ext_resource type="Texture2D" uid="uid://kn2s52jnyak5" path="res://environment/taungoo/buildings/market_stalls_left_n.png" id="3_n"]
 
 [sub_resource type="CanvasTexture" id="CT"]
 diffuse_texture = ExtResource("2_t")
 normal_texture = ExtResource("3_n")
 
 [sub_resource type="ConvexPolygonShape2D" id="Shape"]
-points = PackedVector2Array(108, -229, 142, -170, 19, -40, -15, -99)
+points = PackedVector2Array(144, -223, 199, -140, 19, -40, -47, -137)
 
-[sub_resource type="Gradient" id="GR"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="TR"]
-gradient = SubResource("GR")
-width = 128
-height = 128
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-
-[node name="MarketStallsLeft" type="StaticBody2D"]
+[node name="MarketStallsLeft" type="StaticBody2D" unique_id=1431938644]
 script = ExtResource("1_s")
 front_edge = PackedVector2Array(-48, -84, -39, -11, -28, -10, -27, -23, -3, 0, 40, -20, 42, -10, 53, -10, 63, -34, 66, -77, 76, -70, 82, -48, 94, -46, 106, -60, 108, -44, 117, -41, 123, -45, 126, -71, 134, -74, 147, -67, 153, -77, 162, -79, 175, -185)
-faded_alpha = 0.45
 
-[node name="CastShadow" type="Sprite2D" parent="."]
+[node name="CastShadow" type="Sprite2D" parent="." unique_id=464978871]
 modulate = Color(0.04, 0.03, 0.1, 0.16)
 z_index = -1
-skew = -0.95
 scale = Vector2(1, 0.3)
+skew = -0.95
 texture = ExtResource("2_t")
 centered = false
 offset = Vector2(-48, -194)
 
-[node name="ContactShadow" type="Polygon2D" parent="."]
+[node name="ContactShadow" type="Polygon2D" parent="." unique_id=571026356]
 z_index = -1
 color = Color(0, 0, 0, 0.28)
 polygon = PackedVector2Array(108, -229, 142, -170, 19, -40, -15, -99)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=117770893]
 texture_filter = 1
 texture = SubResource("CT")
 centered = false
 offset = Vector2(-48, -194)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=936869918]
+position = Vector2(-20, 61)
 shape = SubResource("Shape")

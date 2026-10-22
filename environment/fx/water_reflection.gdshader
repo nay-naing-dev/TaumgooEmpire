@@ -20,7 +20,9 @@ void vertex() {
 }
 
 void fragment() {
-	vec4 w = texture(world_water, (wp - world_water_rect.xy) / world_water_rect.zw);
+	vec2 wuv = (wp - world_water_rect.xy) / world_water_rect.zw;
+	if (wuv.x < 0.0 || wuv.y < 0.0 || wuv.x > 1.0 || wuv.y > 1.0) discard;   // outside the map
+	vec4 w = texture(world_water, wuv);
 	if (w.a < 0.5) discard;
 	float dist = max(wp.y - origin.y, 0.0);
 	float band = floor(wp.y / 2.0);                       // pixel-art wave bands

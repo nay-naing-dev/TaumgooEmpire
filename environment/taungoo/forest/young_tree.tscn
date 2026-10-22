@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="tree.gd" id="1_s"]
-[ext_resource type="Texture2D" path="young_tree.png" id="2_t"]
-[ext_resource type="Texture2D" path="young_tree_n.png" id="3_n"]
-[ext_resource type="Texture2D" path="young_tree_shadow.png" id="4_sh"]
+[ext_resource type="Texture2D" path="pink_tree.png" id="2_t"]
+[ext_resource type="Texture2D" path="pink_tree_n.png" id="3_n"]
+[ext_resource type="Texture2D" path="pink_tree_shadow.png" id="4_sh"]
 [ext_resource type="Shader" path="res://environment/fx/sway.gdshader" id="5_sw"]
 
 [sub_resource type="CanvasTexture" id="CT"]
@@ -15,12 +15,16 @@ shader = ExtResource("5_sw")
 shader_parameter/strength = 1.6
 shader_parameter/speed = 1.1
 shader_parameter/phase = 0.0
+shader_parameter/gust_strength = 1.8
+shader_parameter/rustle = 0.08
 
 [sub_resource type="ShaderMaterial" id="SwayShadow"]
 shader = ExtResource("5_sw")
 shader_parameter/strength = 1.6
 shader_parameter/speed = 1.1
 shader_parameter/phase = 0.0
+shader_parameter/gust_strength = 1.8
+shader_parameter/rustle = 0.0
 
 [sub_resource type="CircleShape2D" id="Trunk"]
 radius = 6.0
@@ -36,23 +40,28 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
-[node name="YoungTree" type="StaticBody2D"]
+[sub_resource type="Gradient" id="Petal"]
+offsets = PackedFloat32Array(0, 0.85, 1)
+colors = PackedColorArray(0.98, 0.62, 0.78, 1, 0.92, 0.5, 0.68, 1, 0.92, 0.5, 0.68, 0)
+
+[node name="PinkTreeSmall" type="StaticBody2D"]
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_s")
 
 [node name="CastShadow" type="Sprite2D" parent="."]
-modulate = Color(0.02, 0.05, 0.06, 0.42)
+modulate = Color(0.04, 0.03, 0.08, 0.4)
 z_index = -1
 material = SubResource("SwayShadow")
 skew = -0.95
 scale = Vector2(1, 0.5)
 texture = ExtResource("4_sh")
 centered = false
-offset = Vector2(-55, -124)
+offset = Vector2(-100, -182)
 
 [node name="ContactShadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.5)
 z_index = -1
-scale = Vector2(0.95, 0.34)
+scale = Vector2(1.3, 0.48)
 texture = SubResource("TR")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -60,8 +69,27 @@ texture_filter = 1
 material = SubResource("Sway")
 texture = SubResource("CT")
 centered = false
-offset = Vector2(-55, -124)
+offset = Vector2(-100, -182)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("Trunk")
+
+[node name="Petals" type="CPUParticles2D" parent="."]
+position = Vector2(0, -110)
+amount = 3
+lifetime = 6.0
+preprocess = 6.0
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(50, 35)
+direction = Vector2(1, 0.4)
+spread = 35.0
+gravity = Vector2(0, 9)
+initial_velocity_min = 4.0
+initial_velocity_max = 12.0
+angular_velocity_min = -120.0
+angular_velocity_max = 120.0
+scale_amount_min = 1.5
+scale_amount_max = 2.5
+color_ramp = SubResource("Petal")
