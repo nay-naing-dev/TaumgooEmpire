@@ -19,7 +19,7 @@ Set in the Taungoo era (1486–1752). Every building comes from your Taungoo art
   - Palms that sway, torches, townspeople, dirt paths
 - **Sunset Stage (side-view)** for the sky mage, swordswoman and night thief.
 - Characters: top-down swordsman, gunslinger, Burmese man, sky mage; side-view sky mage, swordswoman, night thief.
-
+okokok
 ## Setup
 1. Unzip → folder `yangon_game/` with `project.godot` inside.
 2. Godot 4.3+ → **Import** → `project.godot` → **Import & Edit**.
