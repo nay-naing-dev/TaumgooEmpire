@@ -7,8 +7,8 @@ const TOPDOWN := {
 	"gunslinger": "res://characters/topdown/gunslinger/gunslinger.tscn",
 	"burmese_man": "res://characters/topdown/burmese_man/burmese_man.tscn",
 	"sky_mage": "res://characters/topdown/sky_mage/sky_mage_topdown.tscn",
-	"black_cat": "res://characters/topdown/black_cat/black_cat.tscn",
 	"hero": "res://characters/topdown/hero/hero.tscn",
+	"black_cat": "res://characters/topdown/black_cat/black_cat.tscn",
 }
 const SIDEVIEW := {
 	"sky_mage": "res://characters/sideview/sky_mage/sky_mage.tscn",
@@ -19,10 +19,13 @@ const TITLE := "res://scenes/title/title_screen.tscn"
 const WORLD := "res://scenes/world/taungoo_world.tscn"
 const STAGE := "res://scenes/stages/sunset_stage.tscn"
 
-var topdown_character := "hero"
-## F2 toggles ASCII-art graphics, F3 toggles day / night.
+var topdown_character := "swordsman"
+## F2 toggles ASCII-art graphics, F3 cycles morning / day / night.
 var ascii_mode := false
 var night_mode := false
+## 0 = morning (golden sunrise), 1 = day, 2 = night.  F3 cycles through them.
+var time_of_day := 0
+const TIME_NAMES := ["Morning", "Day", "Night"]
 var _ascii_layer: CanvasLayer
 ## In ASCII mode, draw the player and bosses as normal sprites on top so they stay readable.
 var ascii_keep_characters_clear := true
@@ -204,7 +207,20 @@ func _sync_clear_characters() -> void:
 		_moved.clear()
 
 
+func set_time(t: int) -> void:
+	time_of_day = wrapi(t, 0, 3)
+	night_mode = time_of_day == 2
+	var s := get_tree().current_scene
+	if s and s.has_method("apply_time"):
+		s.apply_time(time_of_day, true)
+
+
 func set_night(on: bool) -> void:
+	if on:
+		set_time(2)
+		return
+	if time_of_day == 2:
+		time_of_day = 0
 	night_mode = on
 	var s := get_tree().current_scene
 	if s and s.has_method("apply_night"):
@@ -224,7 +240,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.keycode == KEY_F2:
 			set_ascii(not ascii_mode)
 		elif event.keycode == KEY_F3:
-			set_night(not night_mode)
+			set_time(time_of_day + 1)
 	if event.is_action_pressed("ui_cancel") and get_tree().current_scene \
 			and get_tree().current_scene.scene_file_path != TITLE:
 		go(TITLE)

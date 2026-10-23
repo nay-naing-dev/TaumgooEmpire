@@ -16,7 +16,7 @@ var _t := 0.0
 
 
 func _ready() -> void:
-	apply_night(Game.night_mode, false)
+	apply_time(Game.time_of_day, false)
 	_setup_light_and_water()
 	if not spawn_player:
 		_pan_cam = Camera2D.new()
@@ -124,20 +124,74 @@ func _setup_light_and_water() -> void:
 					Game.add_reflection(o.get_node("Sprite2D"))
 
 
-## Night: moonlit blue, sun off, torches and fireflies stand out.
-func apply_night(on: bool, animate: bool) -> void:
-	var tint := Color(0.32, 0.38, 0.62) if on else Color(0.88, 0.87, 0.84)
-	var sun_energy := 0.0 if on else 0.5
-	var shaft_alpha := 0.0 if on else 1.0
-	var t := 1.5 if animate else 0.0
+## Light for the time of day: 0 morning, 1 day, 2 night.
+## Morning: low golden sun, peachy warm haze, glowing sun beams, soft mist.
+const TIMES := {
+	0: {"tint": Color(1.0, 0.88, 0.77), "sun": 0.65, "sun_color": Color(1.0, 0.76, 0.52), "shafts": Color(2.4, 1.7, 1.15, 1.0),
+		"moon": 0.0, "flies": 0.35, "mist": 1.0, "grade": [0.24, 0.09, 1.2, 1.04, 0.26, 0.16, Color(1.0, 0.72, 0.5), 0.6]},
+	1: {"tint": Color(0.88, 0.87, 0.84), "sun": 0.5, "sun_color": Color(1, 0.86, 0.66), "shafts": Color(1, 1, 1, 1),
+		"moon": 0.0, "flies": 0.35, "mist": 0.0, "grade": [0.14, 0.05, 1.06, 1.06, 0.32, 0.06, Color(1.0, 0.8, 0.5), 0.0]},
+	2: {"tint": Color(0.32, 0.38, 0.62), "sun": 0.0, "sun_color": Color(1, 0.86, 0.66), "shafts": Color(1, 1, 1, 0),
+		"moon": 0.45, "flies": 1.0, "mist": 0.45, "grade": [0.14, 0.0, 0.95, 1.06, 0.36, 0.0, Color(0.5, 0.6, 1.0), 0.0]},
+}
+var _mist: CanvasLayer
+
+
+func apply_time(t: int, animate: bool) -> void:
+	var c: Dictionary = TIMES[clampi(t, 0, 2)]
+	var d := 2.0 if animate else 0.0
 	var tw := create_tween().set_parallel()
 	if has_node("Atmosphere"):
-		tw.tween_property($Atmosphere, "color", tint, t)
+		tw.tween_property($Atmosphere, "color", c.tint, d)
 	if has_node("Sun"):
-		tw.tween_property($Sun, "energy", sun_energy, t)
+		tw.tween_property($Sun, "energy", c.sun, d)
+		tw.tween_property($Sun, "color", c.sun_color, d)
 	if has_node("SunShafts"):
-		tw.tween_property($SunShafts, "modulate:a", shaft_alpha, t)
+		tw.tween_property($SunShafts, "modulate", c.shafts, d)
 	if has_node("Moon"):
-		tw.tween_property($Moon, "energy", 0.45 if on else 0.0, t)
+		tw.tween_property($Moon, "energy", c.moon, d)
 	if has_node("Fireflies"):
-		$Fireflies.modulate.a = 1.0 if on else 0.35
+		$Fireflies.modulate.a = c.flies
+	if has_node("Grade/Screen"):
+		var m: ShaderMaterial = $Grade/Screen.material
+		var g: Array = c.grade
+		var keys := ["bloom", "warmth", "saturation", "contrast", "vignette", "sun_glow", "glow_color", "haze"]
+		for i in keys.size():
+			var from = m.get_shader_parameter(keys[i])
+			if from == null:
+				m.set_shader_parameter(keys[i], g[i])
+			else:
+				var k: String = keys[i]
+				tw.tween_method(func(v): m.set_shader_parameter(k, v), from, g[i], d)
+	_ensure_mist()
+	var mm: ShaderMaterial = _mist.get_child(0).material
+	tw.tween_method(func(v): mm.set_shader_parameter("amount", v), float(mm.get_shader_parameter("amount")), c.mist, d)
+	mm.set_shader_parameter("tint", Color(1.0, 0.9, 0.82) if t != 2 else Color(0.6, 0.68, 0.9))
+
+
+## Old name, still used by the weather and older scripts.
+func apply_night(on: bool, animate: bool) -> void:
+	apply_time(2 if on else (Game.time_of_day if Game.time_of_day != 2 else 0), animate)
+
+
+func _ensure_mist() -> void:
+	if _mist:
+		return
+	_mist = CanvasLayer.new()
+	_mist.layer = 1
+	add_child(_mist)
+	var r := ColorRect.new()
+	r.set_anchors_preset(Control.PRESET_FULL_RECT)
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var m := ShaderMaterial.new()
+	m.shader = preload("res://environment/fx/mist.gdshader")
+	m.set_shader_parameter("amount", 0.0)
+	r.material = m
+	_mist.add_child(r)
+
+
+func _physics_process(_delta: float) -> void:
+	if _mist:
+		var m: ShaderMaterial = _mist.get_child(0).material
+		m.set_shader_parameter("cam_pos", -get_viewport().get_canvas_transform().origin / get_viewport().get_canvas_transform().get_scale())
+		m.set_shader_parameter("zoom", get_viewport().get_canvas_transform().get_scale().x)

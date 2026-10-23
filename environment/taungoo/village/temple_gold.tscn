@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://c4vfgw4gliuiy"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" uid="uid://mb5vdsj1o3yk" path="res://environment/taungoo/building.gd" id="1_s"]
-[ext_resource type="Texture2D" uid="uid://dct15msufqtb8" path="res://environment/taungoo/village/temple_gold.png" id="2_t"]
-[ext_resource type="Texture2D" uid="uid://jthj34ba2ejs" path="res://environment/taungoo/village/temple_gold_n.png" id="3_n"]
+[ext_resource type="Script" path="res://environment/taungoo/building.gd" id="1_s"]
+[ext_resource type="Texture2D" path="temple_gold.png" id="2_t"]
+[ext_resource type="Texture2D" path="temple_gold_n.png" id="3_n"]
 
 [sub_resource type="CanvasTexture" id="CT"]
 diffuse_texture = ExtResource("2_t")
@@ -11,32 +11,36 @@ normal_texture = ExtResource("3_n")
 [sub_resource type="ConvexPolygonShape2D" id="Shape"]
 points = PackedVector2Array(-63, -34, 0, 0, 69, -35, 6, -69)
 
-[node name="GoldTemple" type="StaticBody2D" unique_id=764954616]
-visible = false
+[sub_resource type="Gradient" id="GR"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="TR"]
+gradient = SubResource("GR")
+
+[node name="GoldTemple" type="StaticBody2D"]
 script = ExtResource("1_s")
 front_edge = PackedVector2Array(-63, -34, 0, 0, 69, -35)
+faded_alpha = 0.45
 
-[node name="CastShadow" type="Sprite2D" parent="." unique_id=1357063590]
+[node name="CastShadow" type="Sprite2D" parent="."]
 modulate = Color(0.04, 0.03, 0.1, 0.3)
 z_index = -1
-scale = Vector2(1, 0.45)
 skew = -0.95
+scale = Vector2(1, 0.45)
 texture = ExtResource("2_t")
 centered = false
 offset = Vector2(-135, -159)
 
-[node name="ContactShadow" type="Polygon2D" parent="." unique_id=1412115069]
+[node name="ContactShadow" type="Polygon2D" parent="."]
 z_index = -1
 color = Color(0, 0, 0, 0.25)
 polygon = PackedVector2Array(-63, -34, 0, 0, 69, -35, 6, -69)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1381917844]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(123.414185, 133.02475)
-scale = Vector2(1.9141791, 1.8366337)
 texture = SubResource("CT")
 centered = false
 offset = Vector2(-135, -159)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=858667556]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("Shape")

@@ -1,13 +1,22 @@
-[gd_scene format=3 uid="uid://7h82f02la6b2"]
+[gd_scene format=3 uid="uid://cfuhk5o5bdskm"]
 
+[ext_resource type="PackedScene" path="res://environment/taungoo/forest/autumn_oak.tscn" id="f_autumn_oak"]
+[ext_resource type="PackedScene" path="res://environment/taungoo/forest/birch_tree.tscn" id="f_birch_tree"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/forest/bush.tscn" id="f_bush"]
+[ext_resource type="PackedScene" path="res://environment/taungoo/forest/bush_autumn.tscn" id="f_bush_autumn"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/forest/rain_tree_a.tscn" id="f_rain_tree_a"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/forest/rain_tree_b.tscn" id="f_rain_tree_b"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/forest/rain_tree_c.tscn" id="f_rain_tree_c"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/forest/young_tree.tscn" id="f_young_tree"]
 [ext_resource type="PackedScene" uid="uid://bmyxhugpi3374" path="res://characters/enemies/tabinshwehti/tabinshwehti.tscn" id="p_boss"]
+[ext_resource type="PackedScene" path="res://characters/army/cavalry/cavalry.tscn" id="p_cav"]
+[ext_resource type="PackedScene" path="res://characters/npcs/crow/crow.tscn" id="p_crow"]
+[ext_resource type="PackedScene" path="res://characters/army/war_elephant/war_elephant.tscn" id="p_eleph"]
+[ext_resource type="PackedScene" path="res://environment/taungoo/farm/farm_house.tscn" id="p_farmhouse"]
+[ext_resource type="PackedScene" path="res://environment/taungoo/farm/rice_field.tscn" id="p_field"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/buildings/fortress.tscn" id="p_fortress"]
 [ext_resource type="PackedScene" path="res://environment/grass/grass_field.tscn" id="p_grass"]
+[ext_resource type="PackedScene" path="res://characters/army/taungoo_king/taungoo_king.tscn" id="p_king"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/buildings/market_banner.tscn" id="p_market_banner"]
 [ext_resource type="PackedScene" uid="uid://dtv2ef2wwdd53" path="res://environment/taungoo/buildings/market_stalls_left.tscn" id="p_market_stalls_left"]
 [ext_resource type="PackedScene" uid="uid://d15tirfcan06f" path="res://environment/taungoo/buildings/market_stalls_right.tscn" id="p_market_stalls_right"]
@@ -16,6 +25,11 @@
 [ext_resource type="PackedScene" path="res://characters/topdown/burmese_man/burmese_man_npc.tscn" id="p_npc"]
 [ext_resource type="PackedScene" uid="uid://omqy2synfwr1" path="res://environment/taungoo/buildings/palace.tscn" id="p_palace"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/nature/palm.tscn" id="p_palm"]
+[ext_resource type="PackedScene" path="res://environment/nature/pool/pool.tscn" id="p_pool"]
+[ext_resource type="PackedScene" path="res://characters/npcs/rice_porter/rice_porter.tscn" id="p_porter"]
+[ext_resource type="PackedScene" path="res://environment/nature/pool/reeds_0.tscn" id="p_reeds0"]
+[ext_resource type="PackedScene" path="res://environment/nature/pool/reeds_1.tscn" id="p_reeds1"]
+[ext_resource type="PackedScene" path="res://environment/nature/pool/reeds_2.tscn" id="p_reeds2"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/buildings/stilt_house.tscn" id="p_stilt_house"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/buildings/stilt_house_double.tscn" id="p_stilt_house_double"]
 [ext_resource type="PackedScene" path="res://environment/taungoo/buildings/stilt_house_small.tscn" id="p_stilt_house_small"]
@@ -23,6 +37,7 @@
 [ext_resource type="PackedScene" path="res://environment/taungoo/nature/torch.tscn" id="p_torch"]
 [ext_resource type="PackedScene" path="res://environment/trees/red_tree/red_tree.tscn" id="p_tree"]
 [ext_resource type="PackedScene" path="res://environment/weather/weather.tscn" id="p_weather"]
+[ext_resource type="PackedScene" path="res://characters/npcs/village_woman/village_woman.tscn" id="p_woman"]
 [ext_resource type="Script" uid="uid://csfl6cscjgp52" path="res://environment/props/boat.gd" id="sc_boat"]
 [ext_resource type="Script" uid="uid://dp4jcyfb1ead7" path="res://environment/fx/flicker.gd" id="sc_fl"]
 [ext_resource type="Script" uid="uid://ul21cal1u0vv" path="res://scripts/world.gd" id="sc_w"]
@@ -49,6 +64,9 @@ shader_parameter/shade_tint = 0.1
 shader_parameter/vignette = 0.32
 shader_parameter/saturation = 1.06
 shader_parameter/contrast = 1.06
+shader_parameter/sun_glow = 0.06
+shader_parameter/glow_color = Color(1, 0.8, 0.5, 1)
+shader_parameter/haze = 0.0
 
 [sub_resource type="CanvasTexture" id="CT_g"]
 diffuse_texture = ExtResource("t_g")
@@ -116,36 +134,36 @@ colors = PackedColorArray(1, 0.95, 0.6, 0, 1, 0.95, 0.6, 1, 0.8, 1, 0.6, 1, 0.8,
 offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
 colors = PackedColorArray(1, 0.88, 0.6, 0, 1, 0.88, 0.6, 0.8, 1, 0.88, 0.6, 0.8, 1, 0.88, 0.6, 0)
 
-[node name="TaungooWorld" type="Node2D" unique_id=646598985]
+[node name="TaungooWorld" type="Node2D" unique_id=570766077]
 script = ExtResource("sc_w")
 
-[node name="Atmosphere" type="CanvasModulate" parent="." unique_id=1044310424]
+[node name="Atmosphere" type="CanvasModulate" parent="." unique_id=106568724]
 color = Color(0.88, 0.87, 0.84, 1)
 
-[node name="Grade" type="CanvasLayer" parent="." unique_id=1627326577]
+[node name="Grade" type="CanvasLayer" parent="." unique_id=352524740]
 layer = 2
 
-[node name="Screen" type="ColorRect" parent="Grade" unique_id=436312939]
+[node name="Screen" type="ColorRect" parent="Grade" unique_id=170944423]
 material = SubResource("M_atm")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="Ground" type="Sprite2D" parent="." unique_id=29415175]
+[node name="Ground" type="Sprite2D" parent="." unique_id=537677500]
 z_index = -10
 texture_filter = 1
 texture = SubResource("CT_g")
 centered = false
 
-[node name="Water" type="Sprite2D" parent="." unique_id=814071788]
+[node name="Water" type="Sprite2D" parent="." unique_id=2098253563]
 clip_children = 2
 z_index = -9
 material = SubResource("M_w")
 texture = ExtResource("t_w")
 centered = false
 
-[node name="FortressReflection" type="Sprite2D" parent="Water" unique_id=897037119]
+[node name="FortressReflection" type="Sprite2D" parent="Water" unique_id=1241110446]
 texture_filter = 1
 material = SubResource("M_r")
 position = Vector2(1778, 340)
@@ -154,525 +172,565 @@ texture = ExtResource("t_fort")
 centered = false
 offset = Vector2(-238, -333)
 
-[node name="Bridge" type="Sprite2D" parent="." unique_id=215946145]
+[node name="Bridge" type="Sprite2D" parent="." unique_id=848574369]
 z_index = -8
 texture_filter = 1
 position = Vector2(1490, 241)
 texture = ExtResource("t_bridge")
 centered = false
 
-[node name="WaterEdges" type="StaticBody2D" parent="." unique_id=627197616]
+[node name="WaterEdges" type="StaticBody2D" parent="." unique_id=1879614175]
 
-[node name="Shore0" type="CollisionPolygon2D" parent="WaterEdges" unique_id=2107617583]
+[node name="Shore0" type="CollisionPolygon2D" parent="WaterEdges" unique_id=463706210]
 polygon = PackedVector2Array(2047, 893, 1999, 912, 1946, 925, 1882, 964, 1835, 1009, 1789, 1030, 1735, 1040, 1707, 1055, 1684, 1062, 1640, 1104, 1605, 1126, 1482, 1160, 1426, 1206, 1408, 1214, 1336, 1265, 1321, 1270, 1315, 1279, 2047, 1279)
 
-[node name="Shore1" type="CollisionPolygon2D" parent="WaterEdges" unique_id=1686632288]
+[node name="Shore1" type="CollisionPolygon2D" parent="WaterEdges" unique_id=1846613099]
 polygon = PackedVector2Array(1446, 258, 1450, 272, 1478, 288, 1510, 281, 1509, 276, 1462, 250, 1454, 250)
 
-[node name="Shore2" type="CollisionPolygon2D" parent="WaterEdges" unique_id=1070793555]
+[node name="Shore2" type="CollisionPolygon2D" parent="WaterEdges" unique_id=804322314]
 polygon = PackedVector2Array(2045, 219, 1929, 275, 1934, 285, 1932, 303, 1779, 382, 1638, 312, 1625, 315, 1605, 309, 1580, 317, 1556, 305, 1528, 312, 1528, 316, 1563, 336, 1562, 345, 1578, 355, 1579, 375, 1766, 470, 1772, 470, 2044, 332)
 
-[node name="MapEdges" type="StaticBody2D" parent="." unique_id=657466439]
+[node name="MapEdges" type="StaticBody2D" parent="." unique_id=1134732462]
 
-[node name="Edge0" type="CollisionShape2D" parent="MapEdges" unique_id=1027252412]
+[node name="Edge0" type="CollisionShape2D" parent="MapEdges" unique_id=666440779]
 shape = SubResource("Seg0")
 
-[node name="Edge1" type="CollisionShape2D" parent="MapEdges" unique_id=745651036]
+[node name="Edge1" type="CollisionShape2D" parent="MapEdges" unique_id=385361966]
 shape = SubResource("Seg1")
 
-[node name="Edge2" type="CollisionShape2D" parent="MapEdges" unique_id=1583417778]
+[node name="Edge2" type="CollisionShape2D" parent="MapEdges" unique_id=538642470]
 shape = SubResource("Seg2")
 
-[node name="Edge3" type="CollisionShape2D" parent="MapEdges" unique_id=2135064695]
+[node name="Edge3" type="CollisionShape2D" parent="MapEdges" unique_id=221726133]
 shape = SubResource("Seg3")
 
-[node name="Objects" type="Node2D" parent="." unique_id=1269552582]
+[node name="Pool" parent="." unique_id=847836667 instance=ExtResource("p_pool")]
+position = Vector2(890, 235)
+
+[node name="RiceField" parent="." unique_id=683867075 instance=ExtResource("p_field")]
+position = Vector2(82, -6)
+
+[node name="Objects" type="Node2D" parent="." unique_id=365937492]
 y_sort_enabled = true
 
-[node name="Palace" parent="Objects" unique_id=1861955032 instance=ExtResource("p_palace")]
+[node name="Palace" parent="Objects" unique_id=300669080 instance=ExtResource("p_palace")]
 position = Vector2(559, 622)
 
-[node name="StiltHouseDouble" parent="Objects" unique_id=1193382879 instance=ExtResource("p_stilt_house_double")]
+[node name="StiltHouseDouble" parent="Objects" unique_id=941402477 instance=ExtResource("p_stilt_house_double")]
 position = Vector2(1414, 285)
 
-[node name="StiltHouse" parent="Objects" unique_id=525546028 instance=ExtResource("p_stilt_house")]
-position = Vector2(1576, 478)
+[node name="StiltHouse" parent="Objects" unique_id=253075222 instance=ExtResource("p_stilt_house")]
+position = Vector2(1600, 545)
 
-[node name="StiltHouseSmall" parent="Objects" unique_id=161483353 instance=ExtResource("p_stilt_house_small")]
+[node name="StiltHouseSmall" parent="Objects" unique_id=1193919980 instance=ExtResource("p_stilt_house_small")]
 position = Vector2(239, 932)
 
-[node name="Fortress" parent="Objects" unique_id=2039822939 instance=ExtResource("p_fortress")]
+[node name="Fortress" parent="Objects" unique_id=1755434164 instance=ExtResource("p_fortress")]
 position = Vector2(1778, 334)
 
-[node name="MarketStallsLeft" parent="Objects" unique_id=841343719 instance=ExtResource("p_market_stalls_left")]
+[node name="MarketStallsLeft" parent="Objects" unique_id=2144966967 instance=ExtResource("p_market_stalls_left")]
 position = Vector2(838, 795)
 
-[node name="MarketStallsRight" parent="Objects" unique_id=1569189137 instance=ExtResource("p_market_stalls_right")]
+[node name="MarketStallsRight" parent="Objects" unique_id=107408549 instance=ExtResource("p_market_stalls_right")]
 position = Vector2(1096, 807)
 
-[node name="MarketStallFront" parent="Objects" unique_id=1162405735 instance=ExtResource("p_market_stall_front")]
+[node name="MarketStallFront" parent="Objects" unique_id=907732604 instance=ExtResource("p_market_stall_front")]
 position = Vector2(987, 872)
 
-[node name="MarketBanner" parent="Objects" unique_id=751506401 instance=ExtResource("p_market_banner")]
+[node name="MarketBanner" parent="Objects" unique_id=2008343316 instance=ExtResource("p_market_banner")]
 position = Vector2(1188, 790)
 
-[node name="MarketVillager" parent="Objects" unique_id=1057997367 instance=ExtResource("p_market_villager")]
+[node name="MarketVillager" parent="Objects" unique_id=2125735536 instance=ExtResource("p_market_villager")]
 position = Vector2(993, 790)
 
-[node name="Palm0" parent="Objects" unique_id=1426522916 instance=ExtResource("p_palm")]
+[node name="Palm0" parent="Objects" unique_id=542216806 instance=ExtResource("p_palm")]
 position = Vector2(1545, 215)
 
-[node name="Palm1" parent="Objects" unique_id=1288692184 instance=ExtResource("p_palm")]
+[node name="Palm1" parent="Objects" unique_id=276207579 instance=ExtResource("p_palm")]
 position = Vector2(1575, 232)
 
-[node name="Palm2" parent="Objects" unique_id=44227459 instance=ExtResource("p_palm")]
+[node name="Palm2" parent="Objects" unique_id=289147412 instance=ExtResource("p_palm")]
 position = Vector2(1520, 240)
 
-[node name="Palm3" parent="Objects" unique_id=1201922222 instance=ExtResource("p_palm")]
+[node name="Palm3" parent="Objects" unique_id=1567718284 instance=ExtResource("p_palm")]
 position = Vector2(1290, 300)
 
-[node name="Palm4" parent="Objects" unique_id=1439808403 instance=ExtResource("p_palm")]
+[node name="Palm4" parent="Objects" unique_id=1509009151 instance=ExtResource("p_palm")]
 position = Vector2(1700, 560)
-scale = Vector2(2.5, 2.5)
 
-[node name="Palm5" parent="Objects" unique_id=176288162 instance=ExtResource("p_palm")]
+[node name="Palm5" parent="Objects" unique_id=1562360352 instance=ExtResource("p_palm")]
 position = Vector2(140, 960)
-scale = Vector2(2, 2)
 
-[node name="Palm6" parent="Objects" unique_id=310612536 instance=ExtResource("p_palm")]
+[node name="Palm6" parent="Objects" unique_id=474534623 instance=ExtResource("p_palm")]
 position = Vector2(110, 880)
 
-[node name="Palm7" parent="Objects" unique_id=2048119545 instance=ExtResource("p_palm")]
+[node name="Palm7" parent="Objects" unique_id=850362903 instance=ExtResource("p_palm")]
 position = Vector2(420, 880)
 
-[node name="Palm8" parent="Objects" unique_id=96331642 instance=ExtResource("p_palm")]
+[node name="Palm8" parent="Objects" unique_id=1956902999 instance=ExtResource("p_palm")]
 position = Vector2(890, 560)
 
-[node name="Palm11" parent="Objects" unique_id=968477334 instance=ExtResource("p_palm")]
+[node name="Palm11" parent="Objects" unique_id=1874202255 instance=ExtResource("p_palm")]
 position = Vector2(980, 980)
-scale = Vector2(2, 2)
 
-[node name="Palm12" parent="Objects" unique_id=23154508 instance=ExtResource("p_palm")]
+[node name="Palm12" parent="Objects" unique_id=991400296 instance=ExtResource("p_palm")]
 position = Vector2(260, 640)
 
-[node name="Palm13" parent="Objects" unique_id=2024726622 instance=ExtResource("p_palm")]
+[node name="Palm13" parent="Objects" unique_id=753253419 instance=ExtResource("p_palm")]
 position = Vector2(205, 700)
 
-[node name="Palm14" parent="Objects" unique_id=1889080720 instance=ExtResource("p_palm")]
+[node name="Palm14" parent="Objects" unique_id=405350195 instance=ExtResource("p_palm")]
 position = Vector2(1750, 700)
 
-[node name="Palm15" parent="Objects" unique_id=1965587345 instance=ExtResource("p_palm")]
+[node name="Palm15" parent="Objects" unique_id=1758693154 instance=ExtResource("p_palm")]
 position = Vector2(700, 1050)
-scale = Vector2(2.5, 2.5)
 
-[node name="Palm16" parent="Objects" unique_id=1773330384 instance=ExtResource("p_palm")]
+[node name="Palm16" parent="Objects" unique_id=1648093965 instance=ExtResource("p_palm")]
 position = Vector2(1300, 700)
-scale = Vector2(2, 2)
 
-[node name="Forest0" parent="Objects" unique_id=588247667 instance=ExtResource("f_rain_tree_b")]
-position = Vector2(742, 881)
-
-[node name="Forest1" parent="Objects" unique_id=622811046 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest1" parent="Objects" unique_id=136563701 instance=ExtResource("f_rain_tree_c")]
 position = Vector2(2005, 734)
 
-[node name="Forest2" parent="Objects" unique_id=799466851 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest2" parent="Objects" unique_id=238064951 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(1, 331)
 
-[node name="Forest3" parent="Objects" unique_id=1310202537 instance=ExtResource("f_bush")]
+[node name="Forest3" parent="Objects" unique_id=1299028950 instance=ExtResource("f_bush")]
 position = Vector2(1342, 498)
 
-[node name="Forest6" parent="Objects" unique_id=1478062525 instance=ExtResource("f_bush")]
+[node name="Forest6" parent="Objects" unique_id=2047738895 instance=ExtResource("f_bush_autumn")]
 position = Vector2(885, 57)
 
-[node name="Forest12" parent="Objects" unique_id=1793768470 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest12" parent="Objects" unique_id=1982446288 instance=ExtResource("f_rain_tree_c")]
 position = Vector2(956, 147)
 
-[node name="Forest13" parent="Objects" unique_id=255014317 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest13" parent="Objects" unique_id=20856927 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(139, 1089)
 
-[node name="Forest16" parent="Objects" unique_id=573302403 instance=ExtResource("f_rain_tree_a")]
+[node name="Forest16" parent="Objects" unique_id=403244291 instance=ExtResource("f_autumn_oak")]
 position = Vector2(1294, 46)
 
-[node name="Forest17" parent="Objects" unique_id=1644706026 instance=ExtResource("f_rain_tree_c")]
-position = Vector2(739, 697)
-
-[node name="Forest18" parent="Objects" unique_id=235727800 instance=ExtResource("f_rain_tree_a")]
-position = Vector2(237, 153)
-
-[node name="Forest23" parent="Objects" unique_id=362642230 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest23" parent="Objects" unique_id=1286607316 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(2038, 388)
 
-[node name="Forest26" parent="Objects" unique_id=2091923592 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest26" parent="Objects" unique_id=893076988 instance=ExtResource("f_autumn_oak")]
 position = Vector2(34, 1125)
 
-[node name="Forest30" parent="Objects" unique_id=1702194410 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest30" parent="Objects" unique_id=242407907 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(12, 512)
 
-[node name="Forest31" parent="Objects" unique_id=612460574 instance=ExtResource("f_bush")]
-position = Vector2(769, 69)
-
-[node name="Forest33" parent="Objects" unique_id=1921308864 instance=ExtResource("f_bush")]
+[node name="Forest33" parent="Objects" unique_id=1205119282 instance=ExtResource("f_bush_autumn")]
 position = Vector2(10, 966)
 
-[node name="Forest34" parent="Objects" unique_id=1341420132 instance=ExtResource("f_rain_tree_b")]
-position = Vector2(98, 387)
-
-[node name="Forest38" parent="Objects" unique_id=1867631816 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest38" parent="Objects" unique_id=187390000 instance=ExtResource("f_rain_tree_c")]
 position = Vector2(2018, 634)
 
-[node name="Forest40" parent="Objects" unique_id=1599662055 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest40" parent="Objects" unique_id=351006739 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(64, 185)
 
-[node name="Forest41" parent="Objects" unique_id=303935280 instance=ExtResource("f_rain_tree_a")]
+[node name="Forest41" parent="Objects" unique_id=1692870826 instance=ExtResource("f_rain_tree_a")]
 position = Vector2(1899, 442)
 
-[node name="Forest43" parent="Objects" unique_id=1201525373 instance=ExtResource("f_young_tree")]
+[node name="Forest43" parent="Objects" unique_id=184538435 instance=ExtResource("f_young_tree")]
 position = Vector2(4, 1238)
 
-[node name="Forest44" parent="Objects" unique_id=925160925 instance=ExtResource("f_rain_tree_c")]
-position = Vector2(355, 72)
-
-[node name="Forest46" parent="Objects" unique_id=894206093 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest46" parent="Objects" unique_id=2011737420 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(3, 1069)
 
-[node name="Forest49" parent="Objects" unique_id=206869236 instance=ExtResource("f_rain_tree_c")]
-position = Vector2(208, 333)
-
-[node name="Forest51" parent="Objects" unique_id=1439157600 instance=ExtResource("f_rain_tree_c")]
-position = Vector2(525, 43)
-
-[node name="Forest52" parent="Objects" unique_id=747854356 instance=ExtResource("f_bush")]
-position = Vector2(656, 82)
-
-[node name="Forest55" parent="Objects" unique_id=217472504 instance=ExtResource("f_bush")]
-position = Vector2(550, 86)
-
-[node name="Forest56" parent="Objects" unique_id=118590886 instance=ExtResource("f_bush")]
-position = Vector2(457, 135)
-
-[node name="Forest58" parent="Objects" unique_id=304975031 instance=ExtResource("f_bush")]
+[node name="Forest58" parent="Objects" unique_id=1441266968 instance=ExtResource("f_bush_autumn")]
 position = Vector2(1292, 341)
 
-[node name="Forest60" parent="Objects" unique_id=892190148 instance=ExtResource("f_bush")]
+[node name="Forest60" parent="Objects" unique_id=1979782345 instance=ExtResource("f_bush")]
 position = Vector2(1457, 604)
 
-[node name="Forest61" parent="Objects" unique_id=1174046781 instance=ExtResource("f_young_tree")]
-position = Vector2(640, 152)
-
-[node name="Forest64" parent="Objects" unique_id=644264658 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest64" parent="Objects" unique_id=1137968674 instance=ExtResource("f_autumn_oak")]
 position = Vector2(1465, 61)
 
-[node name="Forest65" parent="Objects" unique_id=1236847046 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest65" parent="Objects" unique_id=199551475 instance=ExtResource("f_rain_tree_c")]
 position = Vector2(31, 276)
 
-[node name="Forest66" parent="Objects" unique_id=134297785 instance=ExtResource("f_rain_tree_a")]
+[node name="Forest66" parent="Objects" unique_id=1769084372 instance=ExtResource("f_rain_tree_a")]
 position = Vector2(20, 881)
 
-[node name="Forest67" parent="Objects" unique_id=627702286 instance=ExtResource("f_young_tree")]
-position = Vector2(398, 166)
-
-[node name="Forest68" parent="Objects" unique_id=629948149 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest68" parent="Objects" unique_id=550887266 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(2016, 787)
 
-[node name="Forest69" parent="Objects" unique_id=1038261853 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest69" parent="Objects" unique_id=755547104 instance=ExtResource("f_autumn_oak")]
 position = Vector2(98, 1271)
 
-[node name="Forest71" parent="Objects" unique_id=1469912115 instance=ExtResource("f_bush")]
-position = Vector2(564, 138)
-
-[node name="Forest72" parent="Objects" unique_id=770561057 instance=ExtResource("f_bush")]
+[node name="Forest72" parent="Objects" unique_id=787500438 instance=ExtResource("f_bush")]
 position = Vector2(1924, 686)
 
-[node name="Forest73" parent="Objects" unique_id=1044142946 instance=ExtResource("f_rain_tree_a")]
-position = Vector2(165, 267)
-
-[node name="Forest74" parent="Objects" unique_id=554770359 instance=ExtResource("f_young_tree")]
+[node name="Forest74" parent="Objects" unique_id=1830621580 instance=ExtResource("f_birch_tree")]
 position = Vector2(17, 1185)
 
-[node name="Forest75" parent="Objects" unique_id=1242593279 instance=ExtResource("f_bush")]
+[node name="Forest75" parent="Objects" unique_id=2001794410 instance=ExtResource("f_bush_autumn")]
 position = Vector2(1972, 414)
 
-[node name="Forest76" parent="Objects" unique_id=702143620 instance=ExtResource("f_bush")]
+[node name="Forest76" parent="Objects" unique_id=54613976 instance=ExtResource("f_bush")]
 position = Vector2(2022, 437)
 
-[node name="Forest78" parent="Objects" unique_id=2017057034 instance=ExtResource("f_rain_tree_a")]
+[node name="Forest78" parent="Objects" unique_id=951007239 instance=ExtResource("f_rain_tree_a")]
 position = Vector2(43, 114)
 
-[node name="Forest80" parent="Objects" unique_id=1202956276 instance=ExtResource("f_rain_tree_c")]
-position = Vector2(1540, 669)
+[node name="Forest80" parent="Objects" unique_id=1626322369 instance=ExtResource("f_autumn_oak")]
+position = Vector2(1760, 749)
 
-[node name="Forest81" parent="Objects" unique_id=1416193914 instance=ExtResource("f_bush")]
-position = Vector2(643, 122)
-
-[node name="Forest82" parent="Objects" unique_id=1511378391 instance=ExtResource("f_rain_tree_a")]
+[node name="Forest82" parent="Objects" unique_id=2138966946 instance=ExtResource("f_rain_tree_a")]
 position = Vector2(505, 830)
 
-[node name="Forest83" parent="Objects" unique_id=254821460 instance=ExtResource("f_bush")]
-position = Vector2(273, 42)
+[node name="Forest87" parent="Objects" unique_id=160153988 instance=ExtResource("f_rain_tree_b")]
+position = Vector2(1811, 696)
 
-[node name="Forest87" parent="Objects" unique_id=1784986130 instance=ExtResource("f_rain_tree_b")]
-position = Vector2(1383, 645)
-
-[node name="Forest88" parent="Objects" unique_id=84928116 instance=ExtResource("f_bush")]
+[node name="Forest88" parent="Objects" unique_id=1268852217 instance=ExtResource("f_bush_autumn")]
 position = Vector2(477, 1239)
 
-[node name="Forest89" parent="Objects" unique_id=836589090 instance=ExtResource("f_rain_tree_b")]
-position = Vector2(168, 96)
-
-[node name="Forest90" parent="Objects" unique_id=528402813 instance=ExtResource("f_bush")]
+[node name="Forest90" parent="Objects" unique_id=816088582 instance=ExtResource("f_bush")]
 position = Vector2(416, 685)
 
-[node name="Forest91" parent="Objects" unique_id=1116443288 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest91" parent="Objects" unique_id=248129810 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(932, 565)
 
-[node name="Forest92" parent="Objects" unique_id=1507325516 instance=ExtResource("f_bush")]
+[node name="Forest92" parent="Objects" unique_id=1601570483 instance=ExtResource("f_bush_autumn")]
 position = Vector2(268, 605)
 
-[node name="Forest95" parent="Objects" unique_id=1271908084 instance=ExtResource("f_bush")]
+[node name="Forest95" parent="Objects" unique_id=701103612 instance=ExtResource("f_bush")]
 position = Vector2(172, 48)
 
-[node name="Forest96" parent="Objects" unique_id=150658020 instance=ExtResource("f_rain_tree_b")]
-position = Vector2(941, 199)
+[node name="Forest96" parent="Objects" unique_id=1527745752 instance=ExtResource("f_rain_tree_b")]
+position = Vector2(980, 274)
 
-[node name="Forest97" parent="Objects" unique_id=1926621227 instance=ExtResource("f_rain_tree_a")]
-position = Vector2(899, 259)
+[node name="Forest97" parent="Objects" unique_id=333014784 instance=ExtResource("f_rain_tree_a")]
+position = Vector2(948, 390)
 
-[node name="Forest98" parent="Objects" unique_id=481477413 instance=ExtResource("f_bush")]
+[node name="Forest98" parent="Objects" unique_id=2088927573 instance=ExtResource("f_bush_autumn")]
 position = Vector2(985, 57)
 
-[node name="Forest99" parent="Objects" unique_id=1750322908 instance=ExtResource("f_bush")]
-position = Vector2(216, 197)
-
-[node name="Forest100" parent="Objects" unique_id=1922412382 instance=ExtResource("f_rain_tree_a")]
-position = Vector2(231, 404)
-
-[node name="Forest102" parent="Objects" unique_id=473717502 instance=ExtResource("f_rain_tree_a")]
+[node name="Forest102" parent="Objects" unique_id=1899987464 instance=ExtResource("f_rain_tree_a")]
 position = Vector2(1980, 584)
 
-[node name="Forest105" parent="Objects" unique_id=1642396924 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest105" parent="Objects" unique_id=415931382 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(843, 134)
 
-[node name="Forest111" parent="Objects" unique_id=1660311222 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest111" parent="Objects" unique_id=753286050 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(1, 449)
 
-[node name="Forest112" parent="Objects" unique_id=1392216127 instance=ExtResource("f_rain_tree_a")]
-position = Vector2(229, 474)
-
-[node name="Forest114" parent="Objects" unique_id=269204551 instance=ExtResource("f_rain_tree_b")]
-position = Vector2(1131, 319)
-
-[node name="Forest115" parent="Objects" unique_id=921498173 instance=ExtResource("f_rain_tree_a")]
-position = Vector2(1012, 369)
-
-[node name="Forest118" parent="Objects" unique_id=1252162503 instance=ExtResource("f_young_tree")]
-position = Vector2(931, 520)
-
-[node name="Forest120" parent="Objects" unique_id=1734174289 instance=ExtResource("f_bush")]
-position = Vector2(444, 79)
-
-[node name="Forest124" parent="Objects" unique_id=1217910026 instance=ExtResource("f_rain_tree_a")]
+[node name="Forest124" parent="Objects" unique_id=1793684549 instance=ExtResource("f_autumn_oak")]
 position = Vector2(322, 689)
 
-[node name="Forest125" parent="Objects" unique_id=2126975915 instance=ExtResource("f_bush")]
+[node name="Forest125" parent="Objects" unique_id=621086859 instance=ExtResource("f_bush")]
 position = Vector2(1668, 626)
 
-[node name="Forest126" parent="Objects" unique_id=1724508194 instance=ExtResource("f_young_tree")]
+[node name="Forest126" parent="Objects" unique_id=934047991 instance=ExtResource("f_young_tree")]
 position = Vector2(2022, 530)
 
-[node name="Forest127" parent="Objects" unique_id=2056473371 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest127" parent="Objects" unique_id=1338264033 instance=ExtResource("f_rain_tree_c")]
 position = Vector2(18, 816)
 
-[node name="Forest128" parent="Objects" unique_id=462310682 instance=ExtResource("f_young_tree")]
+[node name="Forest128" parent="Objects" unique_id=1854999536 instance=ExtResource("f_birch_tree")]
 position = Vector2(137, 483)
 
-[node name="Forest130" parent="Objects" unique_id=1078898022 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest130" parent="Objects" unique_id=1740087112 instance=ExtResource("f_rain_tree_c")]
 position = Vector2(377, 826)
 
-[node name="Forest131" parent="Objects" unique_id=64263487 instance=ExtResource("f_young_tree")]
-position = Vector2(902, 383)
-
-[node name="Forest132" parent="Objects" unique_id=306364535 instance=ExtResource("f_rain_tree_c")]
+[node name="Forest132" parent="Objects" unique_id=1142338842 instance=ExtResource("f_autumn_oak")]
 position = Vector2(76, 40)
 
-[node name="Forest133" parent="Objects" unique_id=768721660 instance=ExtResource("f_rain_tree_b")]
+[node name="Forest133" parent="Objects" unique_id=225183253 instance=ExtResource("f_rain_tree_b")]
 position = Vector2(324, 1095)
 
-[node name="Forest134" parent="Objects" unique_id=1685161861 instance=ExtResource("f_rain_tree_c")]
-position = Vector2(900, 1160)
+[node name="Forest134" parent="Objects" unique_id=1349053038 instance=ExtResource("f_rain_tree_c")]
+position = Vector2(1237, 922)
 
-[node name="Forest136" parent="Objects" unique_id=1325806026 instance=ExtResource("f_young_tree")]
+[node name="Forest136" parent="Objects" unique_id=1382340986 instance=ExtResource("f_young_tree")]
 position = Vector2(99, 929)
 
-[node name="Forest140" parent="Objects" unique_id=1699240362 instance=ExtResource("f_bush")]
+[node name="Forest140" parent="Objects" unique_id=920344998 instance=ExtResource("f_bush_autumn")]
 position = Vector2(137, 514)
 
-[node name="Forest144" parent="Objects" unique_id=60341557 instance=ExtResource("f_bush")]
+[node name="Forest144" parent="Objects" unique_id=105065830 instance=ExtResource("f_bush")]
 position = Vector2(2036, 678)
 
-[node name="Forest146" parent="Objects" unique_id=1165708472 instance=ExtResource("f_bush")]
+[node name="Forest146" parent="Objects" unique_id=1918899003 instance=ExtResource("f_bush_autumn")]
 position = Vector2(88, 448)
 
-[node name="Forest149" parent="Objects" unique_id=993696381 instance=ExtResource("f_young_tree")]
+[node name="Forest149" parent="Objects" unique_id=2135069040 instance=ExtResource("f_birch_tree")]
 position = Vector2(93, 1044)
 
-[node name="Forest150" parent="Objects" unique_id=725302285 instance=ExtResource("f_bush")]
-position = Vector2(790, 847)
-
-[node name="Forest151" parent="Objects" unique_id=1150615883 instance=ExtResource("f_bush")]
+[node name="Forest151" parent="Objects" unique_id=797106410 instance=ExtResource("f_bush_autumn")]
 position = Vector2(372, 767)
 
-[node name="Forest152" parent="Objects" unique_id=1307155233 instance=ExtResource("f_bush")]
-position = Vector2(886, 326)
+[node name="Forest152" parent="Objects" unique_id=1852176455 instance=ExtResource("f_bush")]
+position = Vector2(990, 295)
 
-[node name="Forest154" parent="Objects" unique_id=505711279 instance=ExtResource("f_bush")]
+[node name="Forest154" parent="Objects" unique_id=337868653 instance=ExtResource("f_bush_autumn")]
 position = Vector2(417, 871)
 
-[node name="Forest156" parent="Objects" unique_id=774331531 instance=ExtResource("f_bush")]
+[node name="Forest156" parent="Objects" unique_id=908736752 instance=ExtResource("f_bush")]
 position = Vector2(793, 167)
 
-[node name="Forest157" parent="Objects" unique_id=783073561 instance=ExtResource("f_bush")]
+[node name="Forest157" parent="Objects" unique_id=727780623 instance=ExtResource("f_bush_autumn")]
 position = Vector2(287, 663)
 
-[node name="Forest159" parent="Objects" unique_id=191461629 instance=ExtResource("f_bush")]
+[node name="Forest159" parent="Objects" unique_id=1656967366 instance=ExtResource("f_bush")]
 position = Vector2(889, 581)
 
-[node name="Forest160" parent="Objects" unique_id=1178234321 instance=ExtResource("f_bush")]
-position = Vector2(660, 767)
-
-[node name="Forest161" parent="Objects" unique_id=1701415582 instance=ExtResource("f_bush")]
-position = Vector2(274, 176)
-
-[node name="Forest164" parent="Objects" unique_id=189376153 instance=ExtResource("f_bush")]
+[node name="Forest164" parent="Objects" unique_id=2098636198 instance=ExtResource("f_bush_autumn")]
 position = Vector2(1289, 495)
 
-[node name="Forest165" parent="Objects" unique_id=1176558348 instance=ExtResource("f_bush")]
+[node name="Forest165" parent="Objects" unique_id=943746257 instance=ExtResource("f_bush")]
 position = Vector2(70, 964)
 
-[node name="Forest166" parent="Objects" unique_id=1385062483 instance=ExtResource("f_bush")]
+[node name="Forest166" parent="Objects" unique_id=968413417 instance=ExtResource("f_bush_autumn")]
 position = Vector2(852, 851)
 
-[node name="Forest168" parent="Objects" unique_id=1715536017 instance=ExtResource("f_bush")]
-position = Vector2(332, 164)
-
-[node name="Forest172" parent="Objects" unique_id=1099975058 instance=ExtResource("f_bush")]
+[node name="Forest172" parent="Objects" unique_id=1124733873 instance=ExtResource("f_bush_autumn")]
 position = Vector2(1340, 60)
 
-[node name="Forest173" parent="Objects" unique_id=261954753 instance=ExtResource("f_bush")]
+[node name="Forest173" parent="Objects" unique_id=2097282975 instance=ExtResource("f_bush")]
 position = Vector2(1315, 465)
 
-[node name="Forest174" parent="Objects" unique_id=1344084690 instance=ExtResource("f_bush")]
+[node name="Forest174" parent="Objects" unique_id=411233280 instance=ExtResource("f_bush_autumn")]
 position = Vector2(283, 1113)
 
-[node name="Forest175" parent="Objects" unique_id=1971007213 instance=ExtResource("f_bush")]
-position = Vector2(281, 317)
-
-[node name="Forest176" parent="Objects" unique_id=1585405470 instance=ExtResource("f_bush")]
+[node name="Forest176" parent="Objects" unique_id=887052782 instance=ExtResource("f_bush_autumn")]
 position = Vector2(416, 1219)
 
-[node name="Forest178" parent="Objects" unique_id=789793995 instance=ExtResource("f_bush")]
-position = Vector2(675, 861)
+[node name="Forest184" parent="Objects" unique_id=1781305433 instance=ExtResource("f_bush_autumn")]
+position = Vector2(1202, 308)
 
-[node name="Forest180" parent="Objects" unique_id=2106496432 instance=ExtResource("f_bush")]
-position = Vector2(932, 484)
-
-[node name="Forest184" parent="Objects" unique_id=557949142 instance=ExtResource("f_bush")]
-position = Vector2(887, 293)
-
-[node name="Forest186" parent="Objects" unique_id=366249781 instance=ExtResource("f_bush")]
-position = Vector2(751, 832)
-
-[node name="Forest187" parent="Objects" unique_id=1544916561 instance=ExtResource("f_bush")]
+[node name="Forest187" parent="Objects" unique_id=524220705 instance=ExtResource("f_bush_autumn")]
 position = Vector2(887, 501)
 
-[node name="Forest188" parent="Objects" unique_id=308729958 instance=ExtResource("f_bush")]
+[node name="Forest188" parent="Objects" unique_id=1425609851 instance=ExtResource("f_bush")]
 position = Vector2(57, 1028)
 
-[node name="RedTree0" parent="Objects" unique_id=368302866 instance=ExtResource("p_tree")]
-position = Vector2(150, 330)
-scale = Vector2(0.5, 0.5)
-
-[node name="RedTree1" parent="Objects" unique_id=1733943332 instance=ExtResource("p_tree")]
+[node name="RedTree1" parent="Objects" unique_id=1190991522 instance=ExtResource("p_tree")]
 position = Vector2(80, 560)
 scale = Vector2(0.5, 0.5)
 
-[node name="RedTree2" parent="Objects" unique_id=1805461242 instance=ExtResource("p_tree")]
-position = Vector2(900, 330)
+[node name="RedTree2" parent="Objects" unique_id=977877553 instance=ExtResource("p_tree")]
+position = Vector2(1073, 262)
 scale = Vector2(0.5, 0.5)
 
-[node name="RedTree3" parent="Objects" unique_id=1986711959 instance=ExtResource("p_tree")]
+[node name="RedTree3" parent="Objects" unique_id=550270168 instance=ExtResource("p_tree")]
 position = Vector2(1000, 180)
 scale = Vector2(0.5, 0.5)
 
-[node name="Torch0" parent="Objects" unique_id=770703820 instance=ExtResource("p_torch")]
+[node name="Torch0" parent="Objects" unique_id=1627227996 instance=ExtResource("p_torch")]
 position = Vector2(470, 650)
 
-[node name="Torch1" parent="Objects" unique_id=2105961323 instance=ExtResource("p_torch")]
+[node name="Torch1" parent="Objects" unique_id=817696869 instance=ExtResource("p_torch")]
 position = Vector2(655, 655)
 
-[node name="Torch2" parent="Objects" unique_id=1604879269 instance=ExtResource("p_torch")]
+[node name="Torch2" parent="Objects" unique_id=384982641 instance=ExtResource("p_torch")]
 position = Vector2(800, 790)
 
-[node name="Torch3" parent="Objects" unique_id=416423922 instance=ExtResource("p_torch")]
-position = Vector2(1059, 831)
+[node name="Torch3" parent="Objects" unique_id=721111202 instance=ExtResource("p_torch")]
+position = Vector2(1215, 815)
 
-[node name="Torch5" parent="Objects" unique_id=1489438891 instance=ExtResource("p_torch")]
+[node name="Torch5" parent="Objects" unique_id=894942263 instance=ExtResource("p_torch")]
 position = Vector2(1460, 318)
 
-[node name="Townsperson0" parent="Objects" unique_id=2107816703 instance=ExtResource("p_npc")]
+[node name="Townsperson0" parent="Objects" unique_id=877001951 instance=ExtResource("p_npc")]
 position = Vector2(900, 830)
 
-[node name="Townsperson1" parent="Objects" unique_id=1798259934 instance=ExtResource("p_npc")]
+[node name="Townsperson1" parent="Objects" unique_id=24441262 instance=ExtResource("p_npc")]
 position = Vector2(1060, 780)
 
-[node name="Townsperson2" parent="Objects" unique_id=433493169 instance=ExtResource("p_npc")]
+[node name="Townsperson2" parent="Objects" unique_id=1721260300 instance=ExtResource("p_npc")]
 position = Vector2(300, 990)
 
-[node name="Townsperson3" parent="Objects" unique_id=935430192 instance=ExtResource("p_npc")]
-position = Vector2(1290, 1110)
+[node name="Townsperson3" parent="Objects" unique_id=87398421 instance=ExtResource("p_npc")]
+position = Vector2(1581, 1079)
 
-[node name="Townsperson4" parent="Objects" unique_id=908220074 instance=ExtResource("p_npc")]
+[node name="Townsperson4" parent="Objects" unique_id=1661646291 instance=ExtResource("p_npc")]
 position = Vector2(1600, 620)
 
-[node name="Townsperson5" parent="Objects" unique_id=437853584 instance=ExtResource("p_npc")]
+[node name="Townsperson5" parent="Objects" unique_id=867926061 instance=ExtResource("p_npc")]
 position = Vector2(700, 800)
 
-[node name="Tabinshwehti" parent="Objects" unique_id=1923996684 instance=ExtResource("p_boss")]
+[node name="Tabinshwehti" parent="Objects" unique_id=595567987 instance=ExtResource("p_boss")]
 position = Vector2(570, 700)
 
-[node name="GoldenTemple" parent="Objects" unique_id=1321182276 instance=ExtResource("p_temple")]
-position = Vector2(1636.9999, 968.9999)
+[node name="WarElephant1" parent="Objects" unique_id=53917509 instance=ExtResource("p_eleph")]
+position = Vector2(1488, 302)
+patrol_points = PackedVector2Array(1488, 302, 1330, 385, 1200, 540, 1112, 690)
+wait_time = 4.0
+column_size = 5
+column_gap = 5.5
+start_facing = "w"
 
-[node name="TempleTorchL" parent="Objects" unique_id=279847478 instance=ExtResource("p_torch")]
-position = Vector2(1359, 930)
+[node name="WarElephant2" parent="Objects" unique_id=401485453 instance=ExtResource("p_eleph")]
+position = Vector2(1488, 302)
+patrol_points = PackedVector2Array(1488, 302, 1330, 385, 1200, 540, 1112, 690)
+wait_time = 4.0
+column_index = 1
+column_size = 5
+column_gap = 5.5
+start_facing = "w"
 
-[node name="TempleTorchR" parent="Objects" unique_id=932255253 instance=ExtResource("p_torch")]
-position = Vector2(1574, 994)
+[node name="Cavalry1" parent="Objects" unique_id=1875218094 instance=ExtResource("p_cav")]
+position = Vector2(1488, 302)
+patrol_points = PackedVector2Array(1488, 302, 1330, 385, 1200, 540, 1112, 690)
+speed = 16.0
+wait_time = 4.0
+column_index = 2
+column_size = 5
+column_gap = 5.5
+start_facing = "w"
 
-[node name="BigHouse" parent="Objects" unique_id=1139140602 instance=ExtResource("v_house_big")]
-position = Vector2(588, 976)
+[node name="Cavalry2" parent="Objects" unique_id=1867134937 instance=ExtResource("p_cav")]
+position = Vector2(1488, 302)
+patrol_points = PackedVector2Array(1488, 302, 1330, 385, 1200, 540, 1112, 690)
+speed = 16.0
+wait_time = 4.0
+column_index = 3
+column_size = 5
+column_gap = 5.5
+start_facing = "w"
 
-[node name="FarmHouse" parent="Objects" unique_id=1634902059 instance=ExtResource("v_house_farm")]
-position = Vector2(1342, 535)
+[node name="Cavalry3" parent="Objects" unique_id=1914296920 instance=ExtResource("p_cav")]
+position = Vector2(1488, 302)
+patrol_points = PackedVector2Array(1488, 302, 1330, 385, 1200, 540, 1112, 690)
+speed = 16.0
+wait_time = 4.0
+column_index = 4
+column_size = 5
+column_gap = 5.5
+start_facing = "w"
 
-[node name="ThatchHouse" parent="Objects" unique_id=205936454 instance=ExtResource("v_house_thatch")]
-position = Vector2(1132, 1104)
+[node name="CavalryScout1" parent="Objects" unique_id=893764033 instance=ExtResource("p_cav")]
+position = Vector2(800, 790)
+patrol_points = PackedVector2Array(800, 790, 560, 862, 330, 936)
+gallop = true
+gallop_speed = 75.0
+wait_time = 6.0
+column_size = 2
+column_gap = 0.7
+start_facing = "w"
 
-[node name="RedRoofHouse" parent="Objects" unique_id=130128090 instance=ExtResource("v_house_red_roof")]
-position = Vector2(1171, 450)
+[node name="CavalryScout2" parent="Objects" unique_id=533749329 instance=ExtResource("p_cav")]
+position = Vector2(800, 790)
+patrol_points = PackedVector2Array(800, 790, 560, 862, 330, 936)
+gallop = true
+gallop_speed = 75.0
+wait_time = 6.0
+column_index = 1
+column_size = 2
+column_gap = 0.7
+start_facing = "w"
 
-[node name="PavilionHouse" parent="Objects" unique_id=730358388 instance=ExtResource("v_house_pavilion")]
+[node name="TaungooKing" parent="Objects" unique_id=2082444672 instance=ExtResource("p_king")]
+position = Vector2(700, 748)
+
+[node name="KingGuardL" parent="Objects" unique_id=173411864 instance=ExtResource("p_cav")]
+position = Vector2(652, 772)
+
+[node name="KingGuardR" parent="Objects" unique_id=722505893 instance=ExtResource("p_cav")]
+position = Vector2(748, 772)
+
+[node name="RiceFarmHouse" parent="Objects" unique_id=74224633 instance=ExtResource("p_farmhouse")]
+position = Vector2(664, 178)
+
+[node name="RicePorter" parent="Objects" unique_id=1019240339 instance=ExtResource("p_porter")]
+position = Vector2(654, 210)
+patrol_points = PackedVector2Array(654, 210, 560, 258, 430, 310, 300, 335, 180, 295)
+
+[node name="VillageWoman" parent="Objects" unique_id=1256754008 instance=ExtResource("p_woman")]
+position = Vector2(704, 210)
+start_facing = "sw"
+
+[node name="PoolReeds0" parent="Objects" unique_id=621023862 instance=ExtResource("p_reeds0")]
+position = Vector2(958, 342)
+
+[node name="PoolReeds1" parent="Objects" unique_id=239629730 instance=ExtResource("p_reeds1")]
+position = Vector2(974, 390)
+
+[node name="PoolReeds2" parent="Objects" unique_id=832900549 instance=ExtResource("p_reeds2")]
+position = Vector2(1220, 330)
+
+[node name="PoolReeds3" parent="Objects" unique_id=705953593 instance=ExtResource("p_reeds0")]
+position = Vector2(1202, 382)
+
+[node name="PoolReeds4" parent="Objects" unique_id=1001021965 instance=ExtResource("p_reeds1")]
+position = Vector2(1050, 288)
+
+[node name="PoolReeds5" parent="Objects" unique_id=499567380 instance=ExtResource("p_reeds2")]
+position = Vector2(1160, 292)
+
+[node name="PoolTree0" parent="Objects" unique_id=760339582 instance=ExtResource("f_birch_tree")]
+position = Vector2(355.00006, 318)
+
+[node name="PoolTree1" parent="Objects" unique_id=1003950330 instance=ExtResource("f_autumn_oak")]
+position = Vector2(271.00006, 342)
+
+[node name="PoolTree2" parent="Objects" unique_id=2002780757 instance=ExtResource("f_birch_tree")]
+position = Vector2(1260, 267)
+
+[node name="PoolTree3" parent="Objects" unique_id=544541063 instance=ExtResource("f_autumn_oak")]
+position = Vector2(191, 307)
+
+[node name="PoolTree4" parent="Objects" unique_id=1807059278 instance=ExtResource("f_birch_tree")]
+position = Vector2(408.00006, 286.00003)
+
+[node name="PoolBush0" parent="Objects" unique_id=1748866156 instance=ExtResource("f_bush")]
+position = Vector2(1020, 286)
+
+[node name="PoolBush1" parent="Objects" unique_id=657786082 instance=ExtResource("f_bush_autumn")]
+position = Vector2(1260, 320)
+
+[node name="PoolBush2" parent="Objects" unique_id=1780011916 instance=ExtResource("f_bush")]
+position = Vector2(1010, 456)
+
+[node name="PoolBush3" parent="Objects" unique_id=334079433 instance=ExtResource("f_bush_autumn")]
+position = Vector2(1170, 452)
+
+[node name="Crow0" parent="Objects" unique_id=320369040 instance=ExtResource("p_crow")]
+position = Vector2(1030, 468)
+
+[node name="Crow1" parent="Objects" unique_id=478861358 instance=ExtResource("p_crow")]
+position = Vector2(1130, 476)
+
+[node name="Crow2" parent="Objects" unique_id=1980297303 instance=ExtResource("p_crow")]
+position = Vector2(1270, 420)
+
+[node name="Crow3" parent="Objects" unique_id=299200748 instance=ExtResource("p_crow")]
+position = Vector2(1330, 1110)
+
+[node name="GoldenTemple" parent="Objects" unique_id=421484614 instance=ExtResource("p_temple")]
+position = Vector2(1468, 1060)
+
+[node name="TempleTorchL" parent="Objects" unique_id=2059931271 instance=ExtResource("p_torch")]
+position = Vector2(1563, 1086)
+
+[node name="TempleTorchR" parent="Objects" unique_id=1011760566 instance=ExtResource("p_torch")]
+position = Vector2(1593, 1080)
+
+[node name="BigHouse" parent="Objects" unique_id=1266682119 instance=ExtResource("v_house_big")]
+position = Vector2(1217, 1192)
+
+[node name="FarmHouse" parent="Objects" unique_id=52978247 instance=ExtResource("v_house_farm")]
+position = Vector2(1740, 848)
+
+[node name="ThatchHouse" parent="Objects" unique_id=644876581 instance=ExtResource("v_house_thatch")]
+position = Vector2(881, 1197)
+
+[node name="RedRoofHouse" parent="Objects" unique_id=709288078 instance=ExtResource("v_house_red_roof")]
+position = Vector2(1308, 640)
+
+[node name="PavilionHouse" parent="Objects" unique_id=583808746 instance=ExtResource("v_house_pavilion")]
 position = Vector2(1196, 144)
 
-[node name="ThatchHouse2" parent="Objects" unique_id=701482020 instance=ExtResource("v_house_thatch")]
-position = Vector2(1603, 578)
+[node name="ThatchHouse2" parent="Objects" unique_id=1251350198 instance=ExtResource("v_house_thatch")]
+position = Vector2(1548, 800)
 
-[node name="RedRoofHouse2" parent="Objects" unique_id=1728134440 instance=ExtResource("v_house_red_roof")]
-position = Vector2(860, 1040)
+[node name="RedRoofHouse2" parent="Objects" unique_id=1932278801 instance=ExtResource("v_house_red_roof")]
+position = Vector2(1048, 1112)
 
-[node name="FarmHouse2" parent="Objects" unique_id=287034530 instance=ExtResource("v_house_farm")]
-position = Vector2(636, 1216)
+[node name="FarmHouse2" parent="Objects" unique_id=630601731 instance=ExtResource("v_house_farm")]
+position = Vector2(992, 1253)
 
-[node name="Sampan0" type="Sprite2D" parent="Objects" unique_id=1336442430]
+[node name="Sampan0" type="Sprite2D" parent="Objects" unique_id=684758576]
 texture_filter = 1
 position = Vector2(1750, 1150)
 texture = ExtResource("t_boat")
@@ -681,7 +739,7 @@ point_a = Vector2(1750, 1150)
 point_b = Vector2(1950, 1050)
 speed = 9.0
 
-[node name="Wake" type="CPUParticles2D" parent="Objects/Sampan0" unique_id=662674033]
+[node name="Wake" type="CPUParticles2D" parent="Objects/Sampan0" unique_id=1399871765]
 show_behind_parent = true
 position = Vector2(0, 16)
 amount = 18
@@ -696,7 +754,7 @@ initial_velocity_max = 4.0
 scale_amount_max = 2.0
 color_ramp = SubResource("G_wake")
 
-[node name="Sampan1" type="Sprite2D" parent="Objects" unique_id=1669025714]
+[node name="Sampan1" type="Sprite2D" parent="Objects" unique_id=84135602]
 texture_filter = 1
 position = Vector2(1550, 1240)
 texture = ExtResource("t_boat")
@@ -705,7 +763,7 @@ point_a = Vector2(1550, 1240)
 point_b = Vector2(1800, 1130)
 speed = 9.0
 
-[node name="Wake" type="CPUParticles2D" parent="Objects/Sampan1" unique_id=1978575429]
+[node name="Wake" type="CPUParticles2D" parent="Objects/Sampan1" unique_id=192212764]
 show_behind_parent = true
 position = Vector2(0, 16)
 amount = 18
@@ -720,15 +778,15 @@ initial_velocity_max = 4.0
 scale_amount_max = 2.0
 color_ramp = SubResource("G_wake")
 
-[node name="Moon" type="DirectionalLight2D" parent="." unique_id=2060765733]
+[node name="Moon" type="DirectionalLight2D" parent="." unique_id=501400377]
 rotation = -2.3
 color = Color(0.6, 0.72, 1, 1)
 energy = 0.0
 height = 0.6
 
-[node name="SunShafts" type="Node2D" parent="." unique_id=440424246]
+[node name="SunShafts" type="Node2D" parent="." unique_id=2136490733]
 
-[node name="Shaft0" type="Sprite2D" parent="SunShafts" unique_id=305064695]
+[node name="Shaft0" type="Sprite2D" parent="SunShafts" unique_id=1935063588]
 modulate = Color(1, 0.88, 0.6, 0.04)
 material = SubResource("M_add")
 position = Vector2(244, 260)
@@ -739,7 +797,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft1" type="Sprite2D" parent="SunShafts" unique_id=707965522]
+[node name="Shaft1" type="Sprite2D" parent="SunShafts" unique_id=815466139]
 modulate = Color(1, 0.88, 0.6, 0.029)
 material = SubResource("M_add")
 position = Vector2(260, 476)
@@ -750,7 +808,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft2" type="Sprite2D" parent="SunShafts" unique_id=962819246]
+[node name="Shaft2" type="Sprite2D" parent="SunShafts" unique_id=1756837147]
 modulate = Color(1, 0.88, 0.6, 0.038)
 material = SubResource("M_add")
 position = Vector2(1490, 125)
@@ -761,7 +819,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft3" type="Sprite2D" parent="SunShafts" unique_id=705970861]
+[node name="Shaft3" type="Sprite2D" parent="SunShafts" unique_id=1602903086]
 modulate = Color(1, 0.88, 0.6, 0.049)
 material = SubResource("M_add")
 position = Vector2(906, 645)
@@ -772,7 +830,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft4" type="Sprite2D" parent="SunShafts" unique_id=2026151451]
+[node name="Shaft4" type="Sprite2D" parent="SunShafts" unique_id=1780898029]
 modulate = Color(1, 0.88, 0.6, 0.032)
 material = SubResource("M_add")
 position = Vector2(625, 713)
@@ -783,7 +841,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft5" type="Sprite2D" parent="SunShafts" unique_id=476624696]
+[node name="Shaft5" type="Sprite2D" parent="SunShafts" unique_id=160184922]
 modulate = Color(1, 0.88, 0.6, 0.033)
 material = SubResource("M_add")
 position = Vector2(82, 1070)
@@ -794,7 +852,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft6" type="Sprite2D" parent="SunShafts" unique_id=1648254670]
+[node name="Shaft6" type="Sprite2D" parent="SunShafts" unique_id=1471182842]
 modulate = Color(1, 0.88, 0.6, 0.044)
 material = SubResource("M_add")
 position = Vector2(1792, 643)
@@ -805,7 +863,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft7" type="Sprite2D" parent="SunShafts" unique_id=705658144]
+[node name="Shaft7" type="Sprite2D" parent="SunShafts" unique_id=1454582639]
 modulate = Color(1, 0.88, 0.6, 0.027)
 material = SubResource("M_add")
 position = Vector2(138, 777)
@@ -816,7 +874,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft8" type="Sprite2D" parent="SunShafts" unique_id=1085308176]
+[node name="Shaft8" type="Sprite2D" parent="SunShafts" unique_id=1395315027]
 modulate = Color(1, 0.88, 0.6, 0.041)
 material = SubResource("M_add")
 position = Vector2(1348, 1024)
@@ -827,7 +885,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft9" type="Sprite2D" parent="SunShafts" unique_id=242133172]
+[node name="Shaft9" type="Sprite2D" parent="SunShafts" unique_id=270911794]
 modulate = Color(1, 0.88, 0.6, 0.03)
 material = SubResource("M_add")
 position = Vector2(652, 815)
@@ -838,7 +896,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft10" type="Sprite2D" parent="SunShafts" unique_id=461419753]
+[node name="Shaft10" type="Sprite2D" parent="SunShafts" unique_id=1968415912]
 modulate = Color(1, 0.88, 0.6, 0.046)
 material = SubResource("M_add")
 position = Vector2(1673, 723)
@@ -849,7 +907,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft11" type="Sprite2D" parent="SunShafts" unique_id=1738567481]
+[node name="Shaft11" type="Sprite2D" parent="SunShafts" unique_id=1495567786]
 modulate = Color(1, 0.88, 0.6, 0.028)
 material = SubResource("M_add")
 position = Vector2(902, 834)
@@ -860,7 +918,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft12" type="Sprite2D" parent="SunShafts" unique_id=1591522171]
+[node name="Shaft12" type="Sprite2D" parent="SunShafts" unique_id=1111004357]
 modulate = Color(1, 0.88, 0.6, 0.029)
 material = SubResource("M_add")
 position = Vector2(1711, 433)
@@ -871,7 +929,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft13" type="Sprite2D" parent="SunShafts" unique_id=1560762435]
+[node name="Shaft13" type="Sprite2D" parent="SunShafts" unique_id=587305887]
 modulate = Color(1, 0.88, 0.6, 0.032)
 material = SubResource("M_add")
 position = Vector2(1420, 321)
@@ -882,7 +940,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft14" type="Sprite2D" parent="SunShafts" unique_id=657468273]
+[node name="Shaft14" type="Sprite2D" parent="SunShafts" unique_id=2062395961]
 modulate = Color(1, 0.88, 0.6, 0.03)
 material = SubResource("M_add")
 position = Vector2(1158, 439)
@@ -893,7 +951,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="Shaft15" type="Sprite2D" parent="SunShafts" unique_id=1867626185]
+[node name="Shaft15" type="Sprite2D" parent="SunShafts" unique_id=99722182]
 modulate = Color(1, 0.88, 0.6, 0.039)
 material = SubResource("M_add")
 position = Vector2(426, 821)
@@ -904,7 +962,7 @@ script = ExtResource("sc_fl")
 amount = 0.4
 speed = 0.1
 
-[node name="FallingLeaves" type="CPUParticles2D" parent="." unique_id=658951132]
+[node name="FallingLeaves" type="CPUParticles2D" parent="." unique_id=1699619927]
 position = Vector2(1024, 600)
 amount = 70
 lifetime = 9.0
@@ -922,7 +980,7 @@ scale_amount_min = 1.5
 scale_amount_max = 2.5
 color_ramp = SubResource("G_leaf")
 
-[node name="Fireflies" type="CPUParticles2D" parent="." unique_id=1486033301]
+[node name="Fireflies" type="CPUParticles2D" parent="." unique_id=43621134]
 material = SubResource("M_add")
 position = Vector2(1024, 640)
 amount = 90
@@ -938,16 +996,16 @@ initial_velocity_max = 5.0
 scale_amount_max = 1.5
 color_ramp = SubResource("G_fly")
 
-[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1649958755]
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1939387924]
 position = Vector2(1000, 940)
 
-[node name="Sun" type="DirectionalLight2D" parent="." unique_id=19778091]
+[node name="Sun" type="DirectionalLight2D" parent="." unique_id=982059847]
 rotation = 2.356
 color = Color(1, 0.86, 0.66, 1)
 energy = 0.5
 height = 0.5
 
-[node name="Dust" type="CPUParticles2D" parent="." unique_id=632246103]
+[node name="Dust" type="CPUParticles2D" parent="." unique_id=101727721]
 material = SubResource("M_add")
 position = Vector2(1024, 640)
 amount = 110
@@ -962,6 +1020,6 @@ initial_velocity_min = 2.0
 initial_velocity_max = 6.0
 color_ramp = SubResource("G_dust")
 
-[node name="GrassField" parent="." unique_id=1791355002 instance=ExtResource("p_grass")]
+[node name="GrassField" parent="." unique_id=1983800326 instance=ExtResource("p_grass")]
 
-[node name="Weather" parent="." unique_id=1681777993 instance=ExtResource("p_weather")]
+[node name="Weather" parent="." unique_id=1652334834 instance=ExtResource("p_weather")]

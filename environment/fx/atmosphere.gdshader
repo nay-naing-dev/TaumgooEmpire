@@ -8,6 +8,10 @@ uniform float shade_tint = 0.10;
 uniform float vignette = 0.32;
 uniform float saturation = 1.06;
 uniform float contrast = 1.06;
+uniform float sun_glow = 0.06;
+uniform vec4 glow_color : source_color = vec4(1.0, 0.8, 0.5, 1.0);
+// morning haze: soft warm light lifted into the shadows
+uniform float haze = 0.0;
 
 void fragment() {
 	vec3 c = texture(screen, SCREEN_UV).rgb;
@@ -22,7 +26,8 @@ void fragment() {
 	c = (c - 0.5) * contrast + 0.5;
 	// sun glow from the top-right corner
 	vec2 uv = SCREEN_UV;
-	c += vec3(1.0, 0.8, 0.5) * 0.06 * smoothstep(0.9, 0.0, distance(uv, vec2(1.05, -0.1)));
+	c += glow_color.rgb * sun_glow * smoothstep(1.1, 0.0, distance(uv, vec2(1.05, -0.1)));
+	c = mix(c, c + glow_color.rgb * 0.18, haze * (1.0 - smoothstep(0.0, 0.7, lum)));
 	float v = smoothstep(0.95, 0.35, distance(uv, vec2(0.5)) * 1.05);
 	c *= mix(1.0 - vignette, 1.0, v);
 	COLOR = vec4(c, 1.0);
